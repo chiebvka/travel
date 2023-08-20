@@ -4,8 +4,28 @@ import Link from 'next/link'
 import LogoutButton from '../components/LogoutButton'
 import SupabaseLogo from '../components/SupabaseLogo'
 import NextJsLogo from '../components/NextJsLogo'
+import MobileNavigation from '@/components/MobileNavigation'
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
+import Navbar from '@/components/Navbar'
+import { Freehand } from 'next/font/google';
+import { Architects_Daughter } from 'next/font/google';
+import { Montserrat } from 'next/font/google';
+import Buttons from '@/components/Buttons'
+import Image from 'next/image'
+import rio from "./images/rio.jpeg"
+import vacay from "./images/vacay1.jpeg"
+import map from "./images/mapa.jpeg";
+import guides from "./images/mapc.jpeg";
+import HeroForm from '@/components/HeroForm'
+import Sections from '@/components/Sections'
+import Masonry from '@/components/Masonry'
+import NewsFeed from '@/components/NewsFeed'
 
 export const dynamic = 'force-dynamic'
+
+const obitron = Architects_Daughter({ weight: '400', subsets: ["latin"] })
+const montserrat = Montserrat({ weight: '400', subsets: ["latin"] })
+const freehand = Freehand({weight: '400', subsets: ["latin"]})
 
 const resources = [
   {
@@ -41,53 +61,190 @@ const examples = [
 export default async function Index() {
   const supabase = createServerComponentClient({ cookies })
 
+
+  const navigation = [
+    { name: 'Home', href: '/' },
+    { name: 'Guide', href: '/' },
+    { name: 'Place', href: '/' },
+    { name: 'Plan', href: '/' },
+  ]
+
+
+
+
   const {
     data: { user },
   } = await supabase.auth.getUser()
 
   return (
-    <div className="w-full flex flex-col items-center">
-      <nav className="w-full flex justify-center border-b border-b-foreground/10 h-16">
-        <div className="w-full max-w-4xl flex justify-between items-center p-3 text-sm text-foreground">
-          <div />
-          <div>
-            {user ? (
-              <div className="flex items-center gap-4">
-                Hey, {user.email}!
-                <LogoutButton />
+    <div className="w-full flex flex-col relative items-center">
+      {/* Hero Section & Nvigation bar */}
+      
+      <div className=" relative h-[80vh] w-full overflow-hidden ">
+         <Image alt={" Hero Section"} src={rio} className='absolute object-cover w-full h-full' />
+        <div className="absolute inset-0 bg-black opacity-25">
+        </div>
+        <nav className="w-full flex absolute top-0 left-0 right-0 justify-center  bg-transparent  z-20 border-b border-b-foreground/10 h-16">
+    
+          <div className="w-full max-w-6xl flex justify-between items-center p-3 text-sm text-foreground absolute mx-auto inset-x-0 top-0 z-50">
+
+            <div className='border-2 flex justify-between  w-full'>
+              <div className="flex lg:flex-1">
+                <a href="#" className="-m-1.5 p-1.5">
+                  <span className="sr-only">Your Company</span>
+                  <h1 className={`${obitron.className} h-8 lg:text-2xl w-auto`}>mytraveljournal</h1>
+                </a>
               </div>
-            ) : (
-              <Link
-                href="/login"
-                className="py-2 px-4 rounded-md no-underline bg-btn-background hover:bg-btn-background-hover"
-              >
-                Login
-              </Link>
-            )}
+              <div className="flex lg:hidden">
+                <Buttons />
+              </div>
+              <div className="hidden lg:flex lg:gap-x-12 items-center">
+                {navigation.map((item) => (
+                  <Link key={item.name} href={item.href} className="text-sm font-normal leading-6 ">
+                    {item.name}
+                  </Link>
+                ))}
+              </div>
+              <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+  {/* 
+                <Link href="/login" className="text-sm font-semibold leading-6 ">
+                  Log in <span aria-hidden="true">&rarr;</span>
+                </Link> */}
+                {user ? (
+                  <div className="flex items-center gap-4">
+                    Hey, {user.email}!
+                    <LogoutButton />
+                  </div>
+                ) : (
+                  <div className="flex gap-2.5">
+                    <Link
+                      href="/login"
+                      className="py-2 px-5 rounded no-underline border border-[#f25f14] text-[#f25f14]"
+                    >
+                      Login
+                    </Link>
+                    <Link
+                      href="/login"
+                      className="py-2 px-5 rounded no-underline bg-[#f25f14] hover:bg-btn-background-hover"
+                      // className="py-2 px-4 rounded-md no-underline bg-btn-background hover:bg-btn-background-hover"
+                    >
+                      Signup
+                    </Link>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            <div>
+              <MobileNavigation />
+            </div>
+          </div>
+
+        </nav>
+        <div className="text-foreground z-100  relative border-2 w-full  px-6 py-36 mx-auto md:px-12 xl:py-40 border-red-600">
+          <div className="h-screen flex items-center justify-center ">
+            <div className="flex h-full flex-col  items-center mb-4 ">
+              <h1 className="sr-only">Supabase and Next.js Starter Template</h1>
+              <p className={`${montserrat.className} text-3xl lg:text-[84px] font-bold !leading-tight mx-auto max-w-3xl text-center my-12`}>
+              <strong>Amazing Travel { ' '}
+                Experiences</strong> 
+              </p>
+            <p className={`${montserrat.className} text-3xl lg:text-xl font-normal !leading-tight mx-auto max-w-3xl text-center mb-12`}>
+                We got you covered with the best destination <br /> for your next travel
+              </p>
+              <div className='border-2 bg-background rounded-3xl mt-12 border-red-600 w-full p-8'>
+                <HeroForm />
+              
+              </div>
+            </div>
           </div>
         </div>
-      </nav>
+      </div>
 
-      <div className="animate-in flex flex-col gap-14 opacity-0 max-w-4xl px-3 py-16 lg:py-24 text-foreground">
-        <div className="flex flex-col items-center mb-4 lg:mb-12">
-          <div className="flex gap-8 justify-center items-center">
-            <Link href="https://supabase.com/" target="_blank">
-              <SupabaseLogo />
-            </Link>
-            <span className="border-l rotate-45 h-6" />
-            <NextJsLogo />
-          </div>
-          <h1 className="sr-only">Supabase and Next.js Starter Template</h1>
-          <p className="text-3xl lg:text-4xl !leading-tight mx-auto max-w-xl text-center my-12">
-            The fastest way to start building apps with{' '}
-            <strong>Supabase</strong> and <strong>Next.js</strong>
-          </p>
-          <div className="bg-foreground py-3 px-6 rounded-lg font-mono text-sm text-background">
-            Get started by editing <strong>app/page.tsx</strong>
-          </div>
-        </div>
 
+
+
+
+
+
+
+
+
+      <div className="animate-in flex flex-col gap-14 opacity-0 max-w-5xl px-3 py-16 lg:py-24 text-foreground">
         <div className="w-full p-[1px] bg-gradient-to-r from-transparent via-foreground/10 to-transparent" />
+
+          <div className="flex">
+            <Sections className={""} imagery={vacay} imagingAlt={"Photograph of a family on vacation"} title={"Why My Travel Journal?"} description={"My travel journal is a platform aimed to help users with the right information for their next travel. It allows users share their thoughts and experiences of their trip around the world"} link={"Get Started"} url={"/"}  />
+          </div>
+          <div className="flex">
+            <Sections className={"flex mt-3 flex-row-reverse"} imagery={map} imagingAlt={"Photograph of a guide map"} title={"Destination Guide"} description={"Having issues in finding rthe location for your next trip? We got you covered by providing you with all the information you need for easy navigation to your destination"} link={"Learn More"} url={"/"}  />
+          </div>
+
+
+
+          {/** Grid Layout */}
+
+          
+          <div className='border-2 mt-4 border-slate-600'>
+            <div className="flex flex-col">
+              <h1 className="text-4xl font-bold flex items-start justify-center mb-3">
+                  Top Suggestions for Your Next Travel
+              </h1>
+              <p className="text-xl font-normal flex items-start justify-center mt-6">
+                  We provide the best travel experince
+              </p>
+            </div>
+            <div className='grid grid-cols-3 mt-12 gap-5'>
+              <Masonry imagery={map} imagingAlt={"Photograph of a family on vacation"} title={"Paris France"} description={"Offers combination of beautiful scenary, a standard pool, zoo ..."}  url={"/"} className={' col-span-2 h-64 border-green-600'} />
+              <Masonry imagery={rio} imagingAlt={"Photograph of a family on vacation"} title={"Sydney Opera House Australia"} description={"It is often regarded as one of the most famous and distinctive buildings..."}  url={"/"} className={' row-span-2  border-blue-600'} />
+              <Masonry imagery={guides} imagingAlt={"Photograph of a family on vacation"} title={"Geirangerfjorld, Norway"} description={"Your perfect blend for excitment and tourism"}  url={"/"} className={' row-span-2 border-red-600'} />
+              <Masonry imagery={map} imagingAlt={"Photograph of a family on vacation"} title={"Calabar Nigeria"} description={"Best for kids and paremts"}  url={"/"} className={' h-48 border-yellow-600'} />
+              <Masonry imagery={vacay} imagingAlt={"Photograph of a family on vacation"} title={"Ile-Ife Osun, Nigeria"} description={"Allows you to see the beauty of Nigeria and amazing local dishes..."}  url={"/"} className={' h-64 col-span-2 border-purple-600'} />
+            </div>
+            <div className="flex border-2 border-red-600 w-full">
+              <div className="flex w-full items-center justify-center mt-12 mx-auto">
+                <div className="flex items-center  py-2 px-5 rounded no-underline bg-[#f25f14] text-white hover:bg-btn-background-hover">
+                  <button  className="mr-2">Search</button>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                  </svg>
+
+              </div>
+              </div>
+            </div>
+          </div>
+
+
+          {/** News Feed Layout */}
+          <div className="border-2 mt-4 border-slate-600">
+            <div className="flex flex-col">
+              <h1 className="text-4xl font-bold flex items-start justify-center mb-3">
+                  Our News Feed
+              </h1>
+              <p className="text-xl font-normal flex items-start justify-center mt-4">
+                  Now share your thoughts and hear from other about their experience
+              </p>
+            </div>
+            <div className="grid grid-cols-3 mt-12 gap-5">
+              <NewsFeed imagery={guides} imagingAlt={"Photograph of a family on vacation"} title={"Visited my home town in Imo State, Nigeria"} description={"So excited to visit my parents here in Imo State, Nigeria. Love the view, food and had a nice time with old school friends and what not "} url={"/"} cityName={"Imo, Nig"} className={''} />
+              <NewsFeed imagery={vacay} imagingAlt={"Photograph of a family on vacation"} title={"A trip with the family to the United States"} description={"So i decided to take my family on a vacation in the US. It has been an amazing experince so far"} url={"/"} cityName={"New York"} className={''} />
+              <NewsFeed imagery={guides} imagingAlt={"Photograph of a family on vacation"} title={"Now in South Africa with friends for our PhD"} description={"Just arrived with my friends to South Africa for our PhD. Already spent one week and it's been wonderful so far "} url={"/"} cityName={"South Africa"} className={''} />
+            </div>
+            <div className="flex border-2 border-red-600 w-full">
+              <div className="flex w-full items-center justify-center mt-12 mx-auto">
+                <Link href="/" className="flex items-center  py-2 px-5 rounded no-underline bg-[#f25f14] text-white hover:bg-btn-background-hover">
+                  View More
+              </Link>
+              </div>
+            </div>
+          </div>
+
+
+          {/** Planning Trip */}
+          <div className="flex">
+            <Sections className={""} imagery={vacay} imagingAlt={"Photograph of a family on vacation"} title={"Plan Your Next Travel "} description={"Set reminders and learn about the location for your next travel"} link={"Learn More"} url={"/"}  />
+          </div>
+
 
         <div className="flex flex-col gap-8 text-foreground">
           <h2 className="text-lg font-bold text-center">
