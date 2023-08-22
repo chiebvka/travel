@@ -23,39 +23,41 @@ type Props = {}
 export default function HeroForm({}: Props) {
     const [selected, setSelected] = useState(people[0])
   return (
-    <div className="bg-background px-6 rounded-lg w-full flex font-mono text-sm text-foreground">
-        <div className="flex px-3 justify-between items-center  w-full ">
-            <div className="flex relative flex-col">
-                <label htmlFor="countries" className={`${montserrat.className}   text-base font-bold`}>Location</label> 
-                <select id="countries" defaultValue={"DEFAULT"} className="block py-1 -ml-1 mr-2 w-full text-xs text-gray-500 bg-transparent border-0 border-b-2 border-gray-200  dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
-                    <option value="DEFAULT" >Choose a country</option>
-                    <option value="US">United States</option>
-                    <option value="CA">Canada</option>
-                    <option value="FR">France</option>
-                    <option value="DE">Germany</option>
-                </select>
+    <div className="  px-6 rounded-lg w-full flex font-mono text-sm text-foreground">
+        <div className="flex md:flex-row flex-col px-3 justify-between items-center  w-full ">
+            <div className="flex">
+                <div className="flex relative flex-col pr-6 ">
+                    <label htmlFor="countries" className={`${montserrat.className}  text-sm  md:text-base font-bold`}>Location</label> 
+                    <select id="countries" defaultValue={"DEFAULT"} className="block py-1 -ml-1 mr-2 w-full text-[8px] md:text-xs text-gray-500 bg-transparent border-0 border-b-2 border-gray-200  dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
+                        <option value="DEFAULT" >Choose a country</option>
+                        <option value="US">United States</option>
+                        <option value="CA">Canada</option>
+                        <option value="FR">France</option>
+                        <option value="DE">Germany</option>
+                    </select>
+                </div>
+                <div className="flex flex-col border-l px-6 border-foreground">
+                    <label htmlFor="category" className={`${montserrat.className}  text-sm  md:text-base font-bold`}>Categories</label>
+                    <select id="category" defaultValue={"DEFAULT"} className="block py-1 -ml-1 mr-2 w-full text-[8px] md:text-xs text-gray-500 bg-transparent border-0 border-b-2 border-gray-200  dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
+                        <option value="DEFAULT" >Choose a category</option>
+                        <option value="US">United States</option>
+                        <option value="CA">Canada</option>
+                        <option value="FR">France</option>
+                        <option value="DE">Germany</option>
+                    </select>
+                </div>
+                <div className="flex flex-col  border-l pl-6 border-foreground">
+                    <label htmlFor="category" className={`${montserrat.className}  text-sm  md:text-base font-bold`}>Duration</label>
+                    <select id="category" defaultValue={"DEFAULT"} className="block py-1 -ml-1 mr-2 w-full text-[8px] md:text-xs text-gray-500 bg-transparent border-0 border-b-2 border-gray-200  dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
+                        <option value="DEFAULT" >Choose a category</option>
+                        <option value="US">United States</option>
+                        <option value="CA">Canada</option>
+                        <option value="FR">France</option>
+                        <option value="DE">Germany</option>
+                    </select>
+                </div>
             </div>
-            <div className="flex flex-col border-l pl-6 border-foreground">
-                <label htmlFor="category" className={`${montserrat.className}  text-base font-bold`}>Categories</label>
-                <select id="category" defaultValue={"DEFAULT"} className="block py-1 -ml-1 mr-2 w-full text-xs text-gray-500 bg-transparent border-0 border-b-2 border-gray-200  dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
-                    <option value="DEFAULT" >Choose a category</option>
-                    <option value="US">United States</option>
-                    <option value="CA">Canada</option>
-                    <option value="FR">France</option>
-                    <option value="DE">Germany</option>
-                </select>
-            </div>
-            <div className="flex flex-col  border-l pl-6 border-foreground">
-                <label htmlFor="category" className={`${montserrat.className}  text-base font-bold`}>Duration</label>
-                <select id="category" defaultValue={"DEFAULT"} className="block py-1 -ml-1 mr-2 w-full text-xs text-gray-500 bg-transparent border-0 border-b-2 border-gray-200  dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
-                    <option value="DEFAULT" >Choose a category</option>
-                    <option value="US">United States</option>
-                    <option value="CA">Canada</option>
-                    <option value="FR">France</option>
-                    <option value="DE">Germany</option>
-                </select>
-            </div>
-            <div className="flex items-center  py-2 px-5 rounded no-underline bg-[#f25f14] text-white hover:bg-btn-background-hover">
+            <div className="flex items-center md:ml-5 mt-6 md:mt-0 py-2 px-5 rounded no-underline bg-[#f25f14] text-white hover:bg-btn-background-hover">
                 <button  className="mr-2">Search</button>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />

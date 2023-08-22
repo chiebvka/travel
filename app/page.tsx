@@ -20,11 +20,14 @@ import HeroForm from '@/components/HeroForm'
 import Sections from '@/components/Sections'
 import Masonry from '@/components/Masonry'
 import NewsFeed from '@/components/NewsFeed'
+import SwipeShow from '@/components/SwipeShow'
+import NewsLetter from '@/components/NewsLetter'
+import Footer from '@/components/Footer'
 
 export const dynamic = 'force-dynamic'
 
 const obitron = Architects_Daughter({ weight: '400', subsets: ["latin"] })
-const montserrat = Montserrat({ weight: '400', subsets: ["latin"] })
+const montserrat = Montserrat({  subsets: ["latin"] })
 const freehand = Freehand({weight: '400', subsets: ["latin"]})
 
 const resources = [
@@ -144,15 +147,14 @@ export default async function Index() {
         <div className="text-foreground z-100  relative border-2 w-full  px-6 py-36 mx-auto md:px-12 xl:py-40 border-red-600">
           <div className="h-screen flex items-center justify-center ">
             <div className="flex h-full flex-col  items-center mb-4 ">
-              <h1 className="sr-only">Supabase and Next.js Starter Template</h1>
-              <p className={`${montserrat.className} text-3xl lg:text-[84px] font-bold !leading-tight mx-auto max-w-3xl text-center my-12`}>
+              <p className={`${montserrat.className} text-xl md:text-[56px] transition  font-medium lg:text-[84px] md:font-bold !leading-tight mx-auto max-w-lg md:max-w-3xl text-center my-6 md:my-12`}>
               <strong>Amazing Travel { ' '}
                 Experiences</strong> 
               </p>
-            <p className={`${montserrat.className} text-3xl lg:text-xl font-normal !leading-tight mx-auto max-w-3xl text-center mb-12`}>
+            <p className={`${montserrat.className} text-base lg:text-xl font-light md:font-normal md:!leading-tight mx-auto max-w-lg md:max-w-3xl text-center mb-6 md:mb-8 lg:mb-12`}>
                 We got you covered with the best destination <br /> for your next travel
               </p>
-              <div className='border-2 bg-background rounded-3xl mt-12 border-red-600 w-full p-8'>
+              <div className='border-2 md:bg-background  rounded-3xl mt-12 border-red-600 w-full p-8'>
                 <HeroForm />
               
               </div>
@@ -165,20 +167,16 @@ export default async function Index() {
 
 
 
-
-
-
-
-
-      <div className="animate-in flex flex-col gap-14 opacity-0 max-w-5xl px-3 py-16 lg:py-24 text-foreground">
+      <div className="animate-in flex flex-col gap-14 opacity-0 w-full md:max-w-5xl px-3 py-16 lg:py-24 text-foreground">
         <div className="w-full p-[1px] bg-gradient-to-r from-transparent via-foreground/10 to-transparent" />
 
           <div className="flex">
-            <Sections className={""} imagery={vacay} imagingAlt={"Photograph of a family on vacation"} title={"Why My Travel Journal?"} description={"My travel journal is a platform aimed to help users with the right information for their next travel. It allows users share their thoughts and experiences of their trip around the world"} link={"Get Started"} url={"/"}  />
+            <Sections className={"flex flex-col-reverse"} imagery={vacay} imagingAlt={"Photograph of a family on vacation"} title={"Why My Travel Journal?"} description={"My travel journal is a platform aimed to help users with the right information for their next travel. It allows users share their thoughts and experiences of their trip around the world"} link={"Get Started"} url={"/"}  />
           </div>
           <div className="flex">
-            <Sections className={"flex mt-3 flex-row-reverse"} imagery={map} imagingAlt={"Photograph of a guide map"} title={"Destination Guide"} description={"Having issues in finding rthe location for your next trip? We got you covered by providing you with all the information you need for easy navigation to your destination"} link={"Learn More"} url={"/"}  />
+            <Sections className={"flex mt-3 flex-col-reverse md:flex-row-reverse"} imagery={map} imagingAlt={"Photograph of a guide map"} title={"Destination Guide"} description={"Having issues in finding rthe location for your next trip? We got you covered by providing you with all the information you need for easy navigation to your destination"} link={"Learn More"} url={"/"}  />
           </div>
+
 
 
 
@@ -218,21 +216,21 @@ export default async function Index() {
           {/** News Feed Layout */}
           <div className="border-2 mt-4 border-slate-600">
             <div className="flex flex-col">
-              <h1 className="text-4xl font-bold flex items-start justify-center mb-3">
+              <h1 className="lg:text-4xl md:text-xl font-bold flex items-start justify-center mb-3">
                   Our News Feed
               </h1>
-              <p className="text-xl font-normal flex items-start justify-center mt-4">
+              <p className="lg:text-xl md:text-base text-[12px] font-light flex md:items-start items-center justify-center px-4 md:mt-4">
                   Now share your thoughts and hear from other about their experience
               </p>
             </div>
-            <div className="grid grid-cols-3 mt-12 gap-5">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-12 px-3 gap-5">
               <NewsFeed imagery={guides} imagingAlt={"Photograph of a family on vacation"} title={"Visited my home town in Imo State, Nigeria"} description={"So excited to visit my parents here in Imo State, Nigeria. Love the view, food and had a nice time with old school friends and what not "} url={"/"} cityName={"Imo, Nig"} className={''} />
               <NewsFeed imagery={vacay} imagingAlt={"Photograph of a family on vacation"} title={"A trip with the family to the United States"} description={"So i decided to take my family on a vacation in the US. It has been an amazing experince so far"} url={"/"} cityName={"New York"} className={''} />
               <NewsFeed imagery={guides} imagingAlt={"Photograph of a family on vacation"} title={"Now in South Africa with friends for our PhD"} description={"Just arrived with my friends to South Africa for our PhD. Already spent one week and it's been wonderful so far "} url={"/"} cityName={"South Africa"} className={''} />
             </div>
-            <div className="flex border-2 border-red-600 w-full">
-              <div className="flex w-full items-center justify-center mt-12 mx-auto">
-                <Link href="/" className="flex items-center  py-2 px-5 rounded no-underline bg-[#f25f14] text-white hover:bg-btn-background-hover">
+            <div className="flex border-2 mt-8 md:mt-12 border-red-600 w-full">
+              <div className="flex w-full items-center justify-center  mx-auto">
+                <Link href="/" className="flex items-center  py-2 px-8 md:px-5 rounded no-underline bg-[#f25f14] text-white hover:bg-btn-background-hover">
                   View More
               </Link>
               </div>
@@ -246,7 +244,24 @@ export default async function Index() {
           </div>
 
 
-        <div className="flex flex-col gap-8 text-foreground">
+          {/** Heros Review Section */}
+          <div className="mt-4 border-2 border-slate-600">
+            <div className="flex flex-col">
+              <h1 className="text-4xl font-bold flex items-start justify-center mb-3">
+                  Hear What Our Users Say
+              </h1>
+              <p className="text-xl font-normal flex items-start justify-center mt-4">
+                  Below are some users comments about us 
+              </p>
+            </div>
+            <div className="flex border-2 p-3 relative  border-red-600 mt-5">
+              <SwipeShow imagery={undefined} imagingAlt={undefined} title={undefined} description={undefined} reviewer={undefined} className={''} />
+            </div>
+          </div>
+
+
+
+        {/* <div className="flex flex-col gap-8 text-foreground">
           <h2 className="text-lg font-bold text-center">
             Everything you need to get started
           </h2>
@@ -339,8 +354,12 @@ export default async function Index() {
               Supabase
             </Link>
           </p>
-        </div>
+        </div> */}
       </div>
+
+      <NewsLetter />
+      <Footer />
+      
     </div>
   )
 }

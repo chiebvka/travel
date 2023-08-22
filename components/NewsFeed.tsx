@@ -13,7 +13,7 @@ export default function NewsFeed(props: Props) {
   const {imagery, title, imagingAlt, description,  url, cityName, className } = props
 
   return (
-    <div className={`${className} h-[390px] group  border-2 rounded-lg shadow-lg shadow-slate-500 transition duration-300 ease-in-out overflow-hidden relative  border-green-600`}>
+    <div className={`${className} h-[390px] group mt-3  border-2 rounded-lg shadow-lg shadow-slate-500 transition duration-300 ease-in-out overflow-hidden relative  border-green-600`}>
       <div className="flex  h-1/2  w-full">
         <Image src={imagery} alt={imagingAlt} className='h-full w-full rounded-t-lg object-cover transition duration-300 ease-in-out group-hover:scale-110'  /> 
       </div>
