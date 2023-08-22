@@ -20,6 +20,7 @@ type Props = {imagery: any, imagingAlt: any, title: any, description: any, revie
 export default function SwipeShow(props: Props) {
     const {imagery, title, imagingAlt, description,  reviewer, className } = props
 
+    const swiper = useSwiper();
 
     const SlideRef = useRef<HTMLIFrameElement>(null);
 
@@ -29,10 +30,10 @@ export default function SwipeShow(props: Props) {
     })
     // const [handleNext, setHandleNext] = useState()
     const handleNext = () => {
-        SlideRef.current.swiper.slideNext()
+        SlideRef.current?.swiper.slideNext()
     }
     const handlePrev = () => {
-        SlideRef.current.swiper.slidePrev()
+        SlideRef.current?.swiper.slidePrev()
     }
 
     const onSlideChange = (swiper) => {
