@@ -5,7 +5,7 @@ import Image from 'next/image'
 import map from "../app/images/mapa.jpeg"
 import Link from 'next/link'
 import { Montserrat } from 'next/font/google';
-import { Swiper, SwiperSlide, useSwiper } from 'swiper/react';
+import { Swiper, SwiperSlide, useSwiper, SwiperRef } from 'swiper/react';
 
 // Import Swiper styles
 import 'swiper/css';
@@ -22,13 +22,14 @@ export default function SwipeShow(props: Props) {
 
     const swiper = useSwiper();
 
-    const SlideRef = useRef<HTMLIFrameElement>(null);
+    const SlideRef = useRef<SwiperRef>(null);
 
     const [slideBegOrNot, handleSlideByState] = useState({
         isFirst: true,
         isLast: false
     })
     // const [handleNext, setHandleNext] = useState()
+
     const handleNext = () => {
         SlideRef.current?.swiper.slideNext()
     }
@@ -36,7 +37,8 @@ export default function SwipeShow(props: Props) {
         SlideRef.current?.swiper.slidePrev()
     }
 
-    const onSlideChange = (swiper) => {
+
+    const onSlideChange = (swiper: { isBeginning: any; isEnd: any }) => {
         handleSlideByState({
             isFirst: swiper.isBeginning,
             isLast: swiper.isEnd,
@@ -44,6 +46,8 @@ export default function SwipeShow(props: Props) {
     }
 
     const { isLast, isFirst } = slideBegOrNot;
+
+
 
 
   return (
