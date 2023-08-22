@@ -144,7 +144,7 @@ export default async function Index() {
           </div>
 
         </nav>
-        <div className="text-foreground z-100  relative border-2 w-full  px-6 py-36 mx-auto md:px-12 xl:py-40 border-red-600">
+        <div className="text-foreground z-100  relative w-full  px-6 py-36 mx-auto md:px-12 xl:py-40 ">
           <div className="h-screen flex items-center justify-center ">
             <div className="flex h-full flex-col  items-center mb-4 ">
               <p className={`${montserrat.className} text-xl md:text-[56px] transition  font-medium lg:text-[84px] md:font-bold !leading-tight mx-auto max-w-lg md:max-w-3xl text-center my-6 md:my-12`}>
@@ -154,7 +154,7 @@ export default async function Index() {
             <p className={`${montserrat.className} text-base lg:text-xl font-light md:font-normal md:!leading-tight mx-auto max-w-lg md:max-w-3xl text-center mb-6 md:mb-8 lg:mb-12`}>
                 We got you covered with the best destination <br /> for your next travel
               </p>
-              <div className='border-2 md:bg-background  rounded-3xl mt-12 border-red-600 w-full p-8'>
+              <div className=' md:bg-background  rounded-3xl mt-12  w-full p-8'>
                 <HeroForm />
               
               </div>
@@ -183,7 +183,7 @@ export default async function Index() {
           {/** Grid Layout */}
 
           
-          <div className='border-2 mt-4 border-slate-600'>
+          <div className=' mt-4 '>
             <div className="flex flex-col">
               <h1 className="text-4xl font-bold flex items-start justify-center mb-3">
                   Top Suggestions for Your Next Travel
@@ -199,7 +199,7 @@ export default async function Index() {
               <Masonry imagery={map} imagingAlt={"Photograph of a family on vacation"} title={"Calabar Nigeria"} description={"Best for kids and paremts"}  url={"/"} className={' h-48 border-yellow-600'} />
               <Masonry imagery={vacay} imagingAlt={"Photograph of a family on vacation"} title={"Ile-Ife Osun, Nigeria"} description={"Allows you to see the beauty of Nigeria and amazing local dishes..."}  url={"/"} className={' h-64 col-span-2 border-purple-600'} />
             </div>
-            <div className="flex border-2 border-red-600 w-full">
+            <div className="flex  w-full">
               <div className="flex w-full items-center justify-center mt-12 mx-auto">
                 <div className="flex items-center  py-2 px-5 rounded no-underline bg-[#f25f14] text-white hover:bg-btn-background-hover">
                   <button  className="mr-2">Search</button>
@@ -214,7 +214,7 @@ export default async function Index() {
 
 
           {/** News Feed Layout */}
-          <div className="border-2 mt-4 border-slate-600">
+          <div className=" mt-4 ">
             <div className="flex flex-col">
               <h1 className="lg:text-4xl md:text-xl font-bold flex items-start justify-center mb-3">
                   Our News Feed
@@ -228,7 +228,7 @@ export default async function Index() {
               <NewsFeed imagery={vacay} imagingAlt={"Photograph of a family on vacation"} title={"A trip with the family to the United States"} description={"So i decided to take my family on a vacation in the US. It has been an amazing experince so far"} url={"/"} cityName={"New York"} className={''} />
               <NewsFeed imagery={guides} imagingAlt={"Photograph of a family on vacation"} title={"Now in South Africa with friends for our PhD"} description={"Just arrived with my friends to South Africa for our PhD. Already spent one week and it's been wonderful so far "} url={"/"} cityName={"South Africa"} className={''} />
             </div>
-            <div className="flex border-2 mt-8 md:mt-12 border-red-600 w-full">
+            <div className="flex mt-8 md:mt-12 w-full">
               <div className="flex w-full items-center justify-center  mx-auto">
                 <Link href="/" className="flex items-center  py-2 px-8 md:px-5 rounded no-underline bg-[#f25f14] text-white hover:bg-btn-background-hover">
                   View More
@@ -245,7 +245,7 @@ export default async function Index() {
 
 
           {/** Heros Review Section */}
-          <div className="mt-4 border-2 border-slate-600">
+          <div className="">
             <div className="flex flex-col">
               <h1 className="text-4xl font-bold flex items-start justify-center mb-3">
                   Hear What Our Users Say
@@ -254,7 +254,7 @@ export default async function Index() {
                   Below are some users comments about us 
               </p>
             </div>
-            <div className="flex border-2 p-3 relative  border-red-600 mt-5">
+            <div className="flex  p-3 relative   mt-5">
               <SwipeShow imagery={undefined} imagingAlt={undefined} title={undefined} description={undefined} reviewer={undefined} className={''} />
             </div>
           </div>

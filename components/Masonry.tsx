@@ -15,12 +15,12 @@ export default function Masonry(props: Props) {
 
   return (
 
-        <Link href={url} className={`${className} group flex border-2 transition duration-300 ease-in-out overflow-hidden relative  border-green-600`}>
+        <Link href={url} className={`${className} group flex  transition duration-300 ease-in-out overflow-hidden relative  `}>
             <div className="flex w-full items-center relative h-full  rounded-lg">               
                 <Image src={imagery}  alt={imagingAlt} className='w-full absolute h-full transition duration-300 ease-in-out object-cover group-hover:scale-110 rounded-lg' />
                 <div className="absolute inset-0 bg-black opacity-25">
                 </div>
-                <div className="flex flex-col justify-between w-full z-50 border-2 p-2">
+                <div className="flex flex-col justify-between w-full z-50  p-2">
                     <h1 className={`${montserrat.className} transition duration-300 ease-in-out  group-hover:scale-95 text-2xl font-bold `}>{title}</h1>
                             <p className={`${montserrat.className} transition   flex items-center mt-2 duration-300 ease-in-out  group-hover:scale-95 font-normal`}>{description}</p>
                         {/* <div className="flex flex items-center mt-4  border-2 border-red-600">

@@ -68,9 +68,9 @@ export default function SwipeShow(props: Props) {
         ref={SlideRef}
         onSlideChange={onSlideChange}
 
-        className="mySwiper grid grid-cols-3 gap-4 border-2 py-3 border-blue-600 relative"
+        className="mySwiper grid grid-cols-3 gap-4 py-3 relative"
       >
-        <SwiperSlide className='border-2 flex rounded-xl shadow-slate-500 border-green-600 h-full'>
+        <SwiperSlide className='border-2 flex rounded-xl shadow-slate-500  h-full'>
             <div className="flex rounded-lg h-full p-8 md:p-7 lg:p-8 flex-col">
                 <blockquote>
                     <h2 className=" text-lg font-bold line-clamp-2 mb-3"> "Best Location Guide"</h2>
@@ -89,7 +89,7 @@ export default function SwipeShow(props: Props) {
                 </div>
             </div>
         </SwiperSlide>
-        <SwiperSlide className='border-2 flex rounded-xl shadow-slate-500 border-green-600 h-full'>
+        <SwiperSlide className='border-2 flex rounded-xl shadow-slate-500  h-full'>
             <div className="flex rounded-lg h-full p-8 md:p-7 lg:p-8  flex-col">
                 <blockquote>
                     <h2 className=" text-lg font-bold line-clamp-2 mb-3"> "Best Location Guide"</h2>
@@ -108,7 +108,7 @@ export default function SwipeShow(props: Props) {
                 </div>
             </div>
         </SwiperSlide>
-        <SwiperSlide className='border-2 flex rounded-xl shadow-slate-500 border-green-600 h-full'>
+        <SwiperSlide className='border-2 flex rounded-xl shadow-slate-500  h-full'>
             <div className="flex rounded-lg h-full p-8  md:p-7 lg:p-8 flex-col">
                 <blockquote>
                     <h2 className=" text-lg font-bold line-clamp-2 mb-3"> "Best Location Guide"</h2>
@@ -127,7 +127,7 @@ export default function SwipeShow(props: Props) {
                 </div>
             </div>
         </SwiperSlide>
-        <SwiperSlide className='border-2 flex rounded-xl shadow-slate-500 border-green-600 h-full'>
+        <SwiperSlide className='border-2 flex rounded-xl shadow-slate-500  h-full'>
             <div className="flex rounded-lg h-full p-8 md:p-7 lg:p-8 flex-col">
                 <blockquote>
                     <h2 className=" text-lg font-bold line-clamp-2 mb-3"> "Best Location Guide"</h2>
@@ -146,7 +146,7 @@ export default function SwipeShow(props: Props) {
                 </div>
             </div>
         </SwiperSlide>
-        <SwiperSlide className='border-2 flex rounded-xl shadow-slate-500 border-green-600 h-full'>
+        <SwiperSlide className='border-2 flex rounded-xl shadow-slate-500  h-full'>
             <div className="flex rounded-lg h-full p-8 md:p-7 lg:p-8 flex-col">
                 <blockquote>
                     <h2 className=" text-lg font-bold line-clamp-2 mb-3"> "Best Location Guide"</h2>
@@ -165,7 +165,7 @@ export default function SwipeShow(props: Props) {
                 </div>
             </div>
         </SwiperSlide>
-        <SwiperSlide className='border-2 flex rounded-xl shadow-slate-500 border-green-600 h-full'>
+        <SwiperSlide className='border-2 flex rounded-xl shadow-slate-500  h-full'>
             <div className="flex rounded-lg h-full p-8 md:p-7 lg:p-8 flex-col">
                 <blockquote>
                     <h2 className=" text-lg font-bold line-clamp-2 mb-3"> "Best Location Guide"</h2>
@@ -184,7 +184,7 @@ export default function SwipeShow(props: Props) {
                 </div>
             </div>
         </SwiperSlide>
-        <SwiperSlide className='border-2 flex rounded-xl shadow-slate-500 border-green-600 h-full'>
+        <SwiperSlide className='border-2 flex rounded-xl shadow-slate-500  h-full'>
             <div className="flex rounded-lg h-full p-8 md:p-7 lg:p-8 flex-col">
                 <blockquote>
                     <h2 className=" text-lg font-bold line-clamp-2 mb-3"> "Best Location Guide"</h2>
@@ -203,7 +203,7 @@ export default function SwipeShow(props: Props) {
                 </div>
             </div>
         </SwiperSlide>
-        <SwiperSlide className='border-2 flex rounded-xl shadow-slate-500 border-green-600 h-full'>
+        <SwiperSlide className='border-2 flex rounded-xl shadow-slate-500  h-full'>
             <div className="flex rounded-lg h-full p-8 md:p-7 lg:p-8 flex-col">
                 <blockquote>
                     <h2 className=" text-lg font-bold line-clamp-2 mb-3"> "Best Location Guide"</h2>
@@ -222,7 +222,7 @@ export default function SwipeShow(props: Props) {
                 </div>
             </div>
         </SwiperSlide>
-        <SwiperSlide className='border-2 flex rounded-xl shadow-slate-500 border-green-600 h-full'>
+        <SwiperSlide className='border-2 flex rounded-xl shadow-slate-500  h-full'>
             <div className="flex rounded-lg h-full p-8 md:p-7 lg:p-8 flex-col">
                 <blockquote>
                     <h2 className=" text-lg font-bold line-clamp-2 mb-3"> "Best Location Guide"</h2>
@@ -241,7 +241,7 @@ export default function SwipeShow(props: Props) {
                 </div>
             </div>
         </SwiperSlide>
-        <SwiperSlide className='border-2 flex rounded-xl shadow-slate-500 border-green-600 h-full'>
+        <SwiperSlide className='border-2 flex rounded-xl shadow-slate-500  h-full'>
             <div className="flex rounded-lg h-full p-8 md:p-7 lg:p-8 flex-col">
                 <blockquote>
                     <h2 className=" text-lg font-bold line-clamp-2 mb-3"> "Best Location Guide"</h2>
@@ -263,8 +263,8 @@ export default function SwipeShow(props: Props) {
 
       </Swiper>
 
-        <div className="flex border-2 p-6 flex-row-reverse border-red-600 ">
-            <div className="flex border-2  border-green-600">
+        <div className="flex p-6 flex-row-reverse  ">
+            <div className="flex ">
   
                 <button className={`flex border-2 border-foreground bg-[#f25f14] m-1 p-3 rounded-full cursor-pointer transition text-foreground duration-300 ease-in-out ${isFirst ? 'bg-background  opacity-50 border-[#f25f14] transition duration-300 ease-in-out': ' '}`} onClick={handlePrev}>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">

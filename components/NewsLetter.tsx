@@ -12,7 +12,7 @@ export default function NewsLetter({}: Props) {
         <Image alt={" Hero Section"} src={rio} className='absolute object-cover w-full h-full' />
         <div className="absolute inset-0 bg-black opacity-75">
         </div>
-        <div className="text-foreground z-100  relative border-2 w-full  px-6 py-28 md:py-36 mx-auto md:px-12 xl:py-40 border-red-600">
+        <div className="text-foreground z-100  relative w-full  px-6 py-28 md:py-36 mx-auto md:px-12 xl:py-40 ">
           <div className="h-screen flex items-center justify-center ">
             <div className="flex h-full flex-col  items-center mb-4 ">
               <h1 className="sr-only">Supabase and Next.js Starter Template</h1>
@@ -23,7 +23,7 @@ export default function NewsLetter({}: Props) {
                 Stay up to date with our amazing location suggestions and many others
               </p>
             <form action="#" className='w-full '>
-              <div className="items-center mx-auto mb-3 flex  md:space-y-1 border-2 p-1 md:p-3 border-green-600 bg-white rounded-full w-full sm:max-w-screen-sm sm:flex ">
+              <div className="items-center mx-auto mb-3 flex  md:space-y-1 p-1 md:p-3  bg-white rounded-full w-full sm:max-w-screen-sm sm:flex ">
                   <div className="relative w-full">
                       <label htmlFor="email" className="hidden mb-0 md:mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Email address</label>
                       {/* <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
