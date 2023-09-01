@@ -1,9 +1,9 @@
 'use client'
 
-import React, { useRef, useState }  from 'react'
-import Image from 'next/image'
-import map from "../app/images/mapa.jpeg"
-import Link from 'next/link'
+import React, { useRef, useState }  from 'react';
+import Image from 'next/image';
+import map from "../app/images/mapa.jpeg";
+import Link from 'next/link';
 import { Montserrat } from 'next/font/google';
 import { Swiper, SwiperSlide, useSwiper, SwiperRef } from 'swiper/react';
 
@@ -15,7 +15,7 @@ import 'swiper/css/navigation';
 
 import {  Navigation } from 'swiper/modules';
 
-type Props = {imagery: any, imagingAlt: any, title: any, description: any, reviewer: any, className: string}
+type Props = {imagery: any, imagingAlt: any, title: any, description: any, reviewer: any, className: string }
 
 export default function SwipeShow(props: Props) {
     const {imagery, title, imagingAlt, description,  reviewer, className } = props

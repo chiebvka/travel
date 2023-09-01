@@ -23,6 +23,7 @@ import NewsFeed from '@/components/NewsFeed'
 import SwipeShow from '@/components/SwipeShow'
 import NewsLetter from '@/components/NewsLetter'
 import Footer from '@/components/Footer'
+import MasonryMobile from '@/components/MasonryMobile'
 
 export const dynamic = 'force-dynamic'
 
@@ -64,6 +65,8 @@ const examples = [
 export default async function Index() {
   const supabase = createServerComponentClient({ cookies })
 
+  
+
 
   const navigation = [
     { name: 'Home', href: '/' },
@@ -83,31 +86,16 @@ export default async function Index() {
     <div className="w-full flex flex-col relative items-center">
       {/* Hero Section & Nvigation bar */}
       
-      <div className=" relative h-[80vh] w-full overflow-hidden ">
+      <div className=" relative h-[94vh] w-full overflow-hidden ">
          <Image alt={" Hero Section"} src={rio} className='absolute object-cover w-full h-full' />
         <div className="absolute inset-0 bg-black opacity-25">
         </div>
-        <nav className="w-full flex absolute top-0 left-0 right-0 justify-center  bg-transparent  z-20 border-b border-b-foreground/10 h-16">
+        <nav className="w-full flex absolute top-0 left-0 right-0 justify-center  bg-transparent  z-10 border-b border-b-foreground/10 h-16">
     
-          <div className="w-full max-w-6xl flex justify-between items-center p-3 text-sm text-foreground absolute mx-auto inset-x-0 top-0 z-50">
+          <div className="w-full max-w-7xl md:max-w-6xl flex justify-between items-center p-3 text-sm text-foreground absolute mx-auto inset-x-0 top-0 z-50">
 
-            <div className='border-2 flex justify-between  w-full'>
-              <div className="flex lg:flex-1">
-                <a href="#" className="-m-1.5 p-1.5">
-                  <span className="sr-only">Your Company</span>
-                  <h1 className={`${obitron.className} h-8 lg:text-2xl w-auto`}>mytraveljournal</h1>
-                </a>
-              </div>
-              <div className="flex lg:hidden">
-                <Buttons />
-              </div>
-              <div className="hidden lg:flex lg:gap-x-12 items-center">
-                {navigation.map((item) => (
-                  <Link key={item.name} href={item.href} className="text-sm font-normal leading-6 ">
-                    {item.name}
-                  </Link>
-                ))}
-              </div>
+            <div className='border-2 flex justify-between w-11/12 lg:w-full mx-auto'>
+              <Navbar />
               <div className="hidden lg:flex lg:flex-1 lg:justify-end">
   {/* 
                 <Link href="/login" className="text-sm font-semibold leading-6 ">
@@ -127,8 +115,8 @@ export default async function Index() {
                       Login
                     </Link>
                     <Link
-                      href="/login"
-                      className="py-2 px-5 rounded no-underline bg-[#f25f14] hover:bg-btn-background-hover"
+                      href="/signup"
+                      className="py-2 px-5 rounded no-underline bg-[#f25f14] text-white hover:bg-btn-background-hover"
                       // className="py-2 px-4 rounded-md no-underline bg-btn-background hover:bg-btn-background-hover"
                     >
                       Signup
@@ -137,21 +125,17 @@ export default async function Index() {
                 )}
               </div>
             </div>
-
-            <div>
-              <MobileNavigation />
-            </div>
           </div>
 
         </nav>
         <div className="text-foreground z-100  relative w-full  px-6 py-36 mx-auto md:px-12 xl:py-40 ">
           <div className="h-screen flex items-center justify-center ">
             <div className="flex h-full flex-col  items-center mb-4 ">
-              <p className={`${montserrat.className} text-xl md:text-[56px] transition  font-medium lg:text-[84px] md:font-bold !leading-tight mx-auto max-w-lg md:max-w-3xl text-center my-6 md:my-12`}>
+              <p className={`${montserrat.className} text-xl text-white md:text-[56px] transition  font-medium lg:text-[84px] md:font-bold !leading-tight mx-auto max-w-lg md:max-w-3xl text-center my-6 md:my-12`}>
               <strong>Amazing Travel { ' '}
                 Experiences</strong> 
               </p>
-            <p className={`${montserrat.className} text-base lg:text-xl font-light md:font-normal md:!leading-tight mx-auto max-w-lg md:max-w-3xl text-center mb-6 md:mb-8 lg:mb-12`}>
+            <p className={`${montserrat.className} text-base text-white lg:text-xl font-light md:font-normal md:!leading-tight mx-auto max-w-lg md:max-w-3xl text-center mb-6 md:mb-8 lg:mb-12`}>
                 We got you covered with the best destination <br /> for your next travel
               </p>
               <div className=' md:bg-background  rounded-3xl mt-12  w-full p-8'>
@@ -167,11 +151,11 @@ export default async function Index() {
 
 
 
-      <div className="animate-in flex flex-col gap-14 opacity-0 w-full md:max-w-5xl px-3 py-16 lg:py-24 text-foreground">
+      <div className="animate-in flex flex-col gap-14 opacity-0 w-full md:max-w-6xl px-3 py-16 lg:py-24 text-foreground">
         <div className="w-full p-[1px] bg-gradient-to-r from-transparent via-foreground/10 to-transparent" />
 
           <div className="flex">
-            <Sections className={"flex flex-col-reverse"} imagery={vacay} imagingAlt={"Photograph of a family on vacation"} title={"Why My Travel Journal?"} description={"My travel journal is a platform aimed to help users with the right information for their next travel. It allows users share their thoughts and experiences of their trip around the world"} link={"Get Started"} url={"/"}  />
+            <Sections className={"flex flex-col-reverse "} imagery={vacay} imagingAlt={"Photograph of a family on vacation"} title={"Why My Travel Journal?"} description={"My travel journal is a platform aimed to help users with the right information for their next travel. It allows users share their thoughts and experiences of their trip around the world"} link={"Get Started"} url={"/"}  />
           </div>
           <div className="flex">
             <Sections className={"flex mt-3 flex-col-reverse md:flex-row-reverse"} imagery={map} imagingAlt={"Photograph of a guide map"} title={"Destination Guide"} description={"Having issues in finding rthe location for your next trip? We got you covered by providing you with all the information you need for easy navigation to your destination"} link={"Learn More"} url={"/"}  />
@@ -185,19 +169,22 @@ export default async function Index() {
           
           <div className=' mt-4 '>
             <div className="flex flex-col">
-              <h1 className="text-4xl font-bold flex items-start justify-center mb-3">
+              <h1 className="md:text-4xl text-xl font-bold flex items-start justify-center mb-3">
                   Top Suggestions for Your Next Travel
               </h1>
-              <p className="text-xl font-normal flex items-start justify-center mt-6">
+              <p className="md:text-xl text-base font-light md:font-normal flex items-start justify-center mt-3 md:mt-6">
                   We provide the best travel experince
               </p>
             </div>
-            <div className='grid grid-cols-3 mt-12 gap-5'>
-              <Masonry imagery={map} imagingAlt={"Photograph of a family on vacation"} title={"Paris France"} description={"Offers combination of beautiful scenary, a standard pool, zoo ..."}  url={"/"} className={' col-span-2 h-64 border-green-600'} />
-              <Masonry imagery={rio} imagingAlt={"Photograph of a family on vacation"} title={"Sydney Opera House Australia"} description={"It is often regarded as one of the most famous and distinctive buildings..."}  url={"/"} className={' row-span-2  border-blue-600'} />
-              <Masonry imagery={guides} imagingAlt={"Photograph of a family on vacation"} title={"Geirangerfjorld, Norway"} description={"Your perfect blend for excitment and tourism"}  url={"/"} className={' row-span-2 border-red-600'} />
-              <Masonry imagery={map} imagingAlt={"Photograph of a family on vacation"} title={"Calabar Nigeria"} description={"Best for kids and paremts"}  url={"/"} className={' h-48 border-yellow-600'} />
-              <Masonry imagery={vacay} imagingAlt={"Photograph of a family on vacation"} title={"Ile-Ife Osun, Nigeria"} description={"Allows you to see the beauty of Nigeria and amazing local dishes..."}  url={"/"} className={' h-64 col-span-2 border-purple-600'} />
+            <div className='hidden  md:grid grid-cols-3 mt-12 gap-5'>
+              <Masonry imagery={map} imagingAlt={"Photograph of a family on vacation"} title={"Paris France"} description={"Offers combination of beautiful scenary, a standard pool, zoo ..."}  url={"/"} className={' col-span-2 h-64 '} />
+              <Masonry imagery={rio} imagingAlt={"Photograph of a family on vacation"} title={"Sydney Opera House Australia"} description={"It is often regarded as one of the most famous and distinctive buildings..."}  url={"/"} className={' row-span-2 '} />
+              <Masonry imagery={guides} imagingAlt={"Photograph of a family on vacation"} title={"Geirangerfjorld, Norway"} description={"Your perfect blend for excitment and tourism"}  url={"/"} className={' row-span-2'} />
+              <Masonry imagery={map} imagingAlt={"Photograph of a family on vacation"} title={"Calabar Nigeria"} description={"Best for kids and paremts"}  url={"/"} className={' h-48 '} />
+              <Masonry imagery={vacay} imagingAlt={"Photograph of a family on vacation"} title={"Ile-Ife Osun, Nigeria"} description={"Allows you to see the beauty of Nigeria and amazing local dishes..."}  url={"/"} className={' h-64 col-span-2'} />
+            </div>
+            <div className="flex md:hidden">
+              <MasonryMobile imagery={map} imagingAlt={"Photograph of a family on vacation"} title={"Paris France"} description={"Offers combination of beautiful scenary, a standard pool, zoo ..."} url={'/'} className={''} />
             </div>
             <div className="flex  w-full">
               <div className="flex w-full items-center justify-center mt-12 mx-auto">

@@ -8,15 +8,15 @@ type Props = {}
 
 export default function NewsLetter({}: Props) {
   return (
-    <div className='relative h-[38vh]  w-full overflow-hidden'>
+    <div className='relative lg:h-[45vh] h-[30vh] w-full overflow-hidden'>
         <Image alt={" Hero Section"} src={rio} className='absolute object-cover w-full h-full' />
         <div className="absolute inset-0 bg-black opacity-75">
         </div>
-        <div className="text-foreground z-100  relative w-full  px-6 py-28 md:py-36 mx-auto md:px-12 xl:py-40 ">
+        <div className="text-foreground z-100   relative w-full flex items-center justify-center py-12  px-6   mx-auto md:px-12 ">
           <div className="h-screen flex items-center justify-center ">
             <div className="flex h-full flex-col  items-center mb-4 ">
               <h1 className="sr-only">Supabase and Next.js Starter Template</h1>
-              <p className={`${montserrat.className} md:text-2xl lg:text-[40px] font-bold !leading-tight mx-auto w-full lg:max-w-3xl text-white text-center mb-6 lg:my-12`}>
+              <p className={`${montserrat.className} md:text-2xl lg:text-[40px] font-bold !leading-tight mx-auto w-full lg:max-w-3xl text-white text-center mb-6 `}>
               <strong>Subscribe to our newsletter</strong> 
               </p>
             <p className={`${montserrat.className} md:text-xl lg:text-[20px] font-light lg:font-normal !leading-tight mx-auto w-full lg:max-w-3xl text-white text-center mb-7 lg:mb-12`}>
@@ -29,7 +29,7 @@ export default function NewsLetter({}: Props) {
                       {/* <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
                           <svg className="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg>
                       </div> */}
-                      <input className="block p-3 pl-10 w-full text-sm text-gray-900 bg-transparent rounded-lg border border-gray-300 sm:rounded-none sm:rounded-l-lg focus:ring-primary-500 focus:border-primary-500 dark:bg-transparent dark:border-none dark:placeholder-gray-400 dark:text-white dark:focus:ring-[#f25f14] dark:focus:border-[#f25f14" placeholder="Enter your email address" type="email" id="email" required={true} />
+                      <input className="block p-3 pl-10 w-full text-sm text-gray-900 bg-transparent rounded-lg  border-gray-300 sm:rounded-none sm:rounded-l-lg  focus:ring-transparent focus:border-primary-500 outline-transparent outline-0 " placeholder="Enter your email address" type="email" id="email" required={true} />
                   </div>
                   <div>
                       <button type="submit" className="py-3 px-5 w-full text-sm font-medium text-center text-white rounded-full border cursor-pointer bg-[#f25f14] border-primary-600  sm:rounded-full hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Subscribe</button>

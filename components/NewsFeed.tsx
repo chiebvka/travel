@@ -1,5 +1,5 @@
-import Image from 'next/image';
 import React from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { Montserrat } from 'next/font/google';
 
@@ -13,7 +13,7 @@ export default function NewsFeed(props: Props) {
   const {imagery, title, imagingAlt, description,  url, cityName, className } = props
 
   return (
-    <div className={`${className} h-[390px] group mt-3 rounded-lg shadow-lg shadow-slate-500 transition duration-300 ease-in-out overflow-hidden relative `}>
+    <div className={`${className} h-[390px] group mt-3 rounded-lg shadow-md  shadow-slate-600 transition duration-300 ease-in-out overflow-hidden relative `}>
       <div className="flex  h-1/2  w-full">
         <Image src={imagery} alt={imagingAlt} className='h-full w-full rounded-t-lg object-cover transition duration-300 ease-in-out group-hover:scale-110'  /> 
       </div>
@@ -27,7 +27,7 @@ export default function NewsFeed(props: Props) {
             <span className='ml-1 text-xs flex '>{cityName}</span>
 
           </div>
-          <Link href={url} className="w-1/2 flex items-center underline text-[#f25f14] text-xs border-2">View on Google Maps</Link>
+          <Link href={url} className="w-1/2 flex items-center underline text-[#f25f14] text-xs">View on Google Maps</Link>
         </div>
         <div className="flex mt-2">
           <p className='line-clamp-3'>{description}</p>
