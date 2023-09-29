@@ -26,7 +26,7 @@ export default function Navbar({}: Props) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   const navigation = [
-    { name: 'Home', href: '/' },
+    { name: 'Home', href: '/home' },
     { name: 'Guide', href: '/' },
     { name: 'Place', href: '/' },
     { name: 'Plan', href: '/' },
@@ -90,7 +90,7 @@ export default function Navbar({}: Props) {
       </div>
       <div className="hidden lg:flex lg:gap-x-12 items-center">
         {navigation.map((item) => (
-          <Link key={item.name} href={item.href} className="text-sm text-white font-normal leading-6 ">
+          <Link key={item.name} href={item.href} className=" text-white md:text-xl text-base hover:opacity-60 font-normal leading-6 ">
             {item.name}
           </Link>
         ))}

@@ -21,21 +21,10 @@ export default function Masonry(props: Props) {
                 <div className="absolute inset-0 bg-black opacity-25">
                 </div>
                 <div className="flex flex-col justify-between w-full z-50  p-2">
-                    <h1 className={`${montserrat.className} transition duration-300 ease-in-out  group-hover:scale-95 text-2xl font-bold `}>{title}</h1>
-                            <p className={`${montserrat.className} transition   flex items-center mt-2 duration-300 ease-in-out  group-hover:scale-95 font-normal`}>{description}</p>
-                        {/* <div className="flex flex items-center mt-4  border-2 border-red-600">
-                        </div>
-                    <div className="flex items-center mt-4 justify-between">
-                    </div> */}
-                        {/* <div className="flex w-5/12 border-2 border-red-600 justify-end">
-                            <Link href={url} className='w-6/12 mx-auto  border-2 border-white rounded-xl flex items-center justify-center p-[7px] gap-[7px] h-[42px] '> {link}</Link>
-                        </div> */}
+                    <h1 className={`${montserrat.className} transition md:text-4xl text-xl duration-300 ease-in-out text-white  group-hover:scale-95 text-2xl font-bold `}>{title}</h1>
+                            <p className={`${montserrat.className} transition md:text-xl text-base  flex items-center mt-2 duration-300 text-white  ease-in-out  group-hover:scale-95 font-normal`}>{description}</p>
                 </div>
             </div>
-            {/* <div className="flex border-2 row-span-2  border-blue-600"></div>
-            <div className="flex border-2  row-span-2 border-red-600"></div>
-            <div className="flex border-2 h-48 border-yellow-600"></div>
-            <div className="flex border-2 h-64 col-span-2 border-purple-600"></div> */}
         </Link>
 
   )

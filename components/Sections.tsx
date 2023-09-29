@@ -10,7 +10,7 @@ export default function Sections(props: Props) {
     const {imagery, title, imagingAlt, description, link, url, className } = props
 
   return (
-    <div className={`${className} md:flex block md:flex-row  items-center md:justify-between p-3  w-full`}>
+    <div className={`${className} md:flex block md:flex-row text-foreground items-center md:justify-between p-3  w-full`}>
         <div className="flex md:w-6/12 w-full  rounded-lg ">
             <div className="flex md:w-10/12 w-full my-8 md:my-0 mx-auto relative h-full  rounded-lg">               
                 <Image src={imagery}  alt={imagingAlt} className='w-full h-full object-contain rounded-lg' />
