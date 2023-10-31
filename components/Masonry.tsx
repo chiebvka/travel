@@ -21,7 +21,7 @@ export default function Masonry(props: Props) {
                 <div className="absolute inset-0 bg-black opacity-25">
                 </div>
                 <div className="flex flex-col justify-between w-full z-50  p-2">
-                    <h1 className={`${montserrat.className} transition md:text-4xl text-xl duration-300 ease-in-out text-white  group-hover:scale-95 text-2xl font-bold `}>{title}</h1>
+                    <h1 className={`${montserrat.className} transition md:text-4xl text-xl duration-300 ease-in-out text-white  group-hover:scale-95 font-bold `}>{title}</h1>
                             <p className={`${montserrat.className} transition md:text-xl text-base  flex items-center mt-2 duration-300 text-white  ease-in-out  group-hover:scale-95 font-normal`}>{description}</p>
                 </div>
             </div>
