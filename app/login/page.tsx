@@ -10,6 +10,7 @@ import Image from 'next/image';
 import { Caveat, Montserrat } from 'next/font/google'
 import SocialLogin from './SocialLogin';
 import FormLoading from '@/components/FormLoading';
+import { Button } from '@/components/ui/button';
 
 
 type AlertProps = {
@@ -60,11 +61,11 @@ export default  function Login() {
 
   
   return (
-    <div className=" flex w-full px-8 sm:max-w-md justify-center overflow-hidden gap-2 bg-cover bg-center bg-fixed" style={{backgroundImage: `url(${rio})`}}>
+    <div className=" flex w-full px-8 sm:max-w-md -mt-16 justify-center  overflow-hidden gap-2 bg-cover bg-center bg-fixed" style={{backgroundImage: `url(${rio})`}}>
       <Image alt={" Hero Section"} src={rio} className='absolute object-cover w-full h-full' />
       <div className="absolute inset-0 bg-black opacity-25">
       </div>
-      <div className=" w-full md:mt-40  block  my-auto py-12 z-20 ">
+      <div className=" my-8 w-full md:mt-40  block md:my-auto  py-12 z-20 ">
         
         <Link href="/" className={`${cavet.className} h-8 flex items-center justify-center text-4xl z-10 mb-4 text-white  w-auto`} >
           mytraveljournal.
@@ -72,7 +73,7 @@ export default  function Login() {
 
         <h1 className={ `${montserrat.className} h-8 flex items-center justify-center text-xl  z-10 mb-6 text-white  w-auto`}>Login</h1>
 
-            <div className="flex-1 flex flex-col w-full bg-white rounded-lg p-8 border-2 justify-center gap-2 text-foreground">
+            <div className="flex-1 flex flex-col w-full bg-white rounded-lg p-8 justify-center gap-2 text-foreground">
             <SocialLogin />
               <label className="text-md text-black" htmlFor="email">
                 Email
@@ -97,7 +98,7 @@ export default  function Login() {
                 value={password}
                 required
               />
-              <button onClick={handleSignIn}  disabled={loading}  className="bg-[#f25f14] rounded px-4 py-2 text-white mb-2">
+              <Button onClick={handleSignIn}  disabled={loading}  className="bg-primary rounded px-4 py-2 text-white mb-2">
               {loading ? (
               <div className="flex items-center justify-center">
                 <FormLoading status={"Logging in..."} /> 
@@ -105,7 +106,7 @@ export default  function Login() {
             ) : (
               'Login'
             )}
-              </button>
+              </Button>
               {error && (
                 <p className="mt-4 p-3 bg-red-100 border-2 rounded-md border-red-700 text-red-700 text-center">
                   {error.msg}
@@ -114,7 +115,7 @@ export default  function Login() {
               <span
                 className="rounded md:px-4 flex items-center text-xs justify-center text-black mb-2"
               >
-                Don't have an account? <Link href="/signup" className='text-[#f25f14] ml-1 '>Sign Up</Link>
+                Don't have an account? <Link href="/signup" className='text-primary ml-1 '>Sign Up</Link>
               </span>
               <Messages />
             </div>

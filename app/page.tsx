@@ -25,6 +25,9 @@ import NewsLetter from '@/components/NewsLetter'
 import Footer from '@/components/Footer'
 import MasonryMobile from '@/components/MasonryMobile'
 import { Suspense } from 'react'
+import { ModeToggle } from '@/components/ModeToggle'
+import { Button } from '@/components/ui/button'
+import UserNavigation from '@/components/UserNavigation'
 
 
 export const dynamic = 'force-dynamic'
@@ -87,62 +90,24 @@ export default async function Index() {
   return (
     <Suspense >
 
-      <div className="w-full flex flex-col relative items-center">
+      <div className="w-full flex  flex-col relative items-center">
         {/* Hero Section & Nvigation bar */}
         
-        <div className=" relative h-[94vh] w-full overflow-hidden ">
+        <div className=" relative h-[100vh] -mt-24 w-full overflow-hidden ">
           <Image alt={" Hero Section"} src={rio} className='absolute object-cover w-full h-full' />
           <div className="absolute inset-0 bg-black opacity-25">
           </div>
-          <nav className="w-full flex absolute top-0 left-0 right-0 justify-center  bg-transparent  z-10 border-b border-b-foreground/10 h-16">
-      
-            <div className="w-full max-w-7xl md:max-w-6xl flex justify-between items-center p-3 text-sm text-foreground absolute mx-auto inset-x-0 top-0 z-50">
-
-              <div className='border-2 flex justify-between w-11/12 lg:w-full mx-auto'>
-                <Navbar />
-                <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-    {/* 
-                  <Link href="/login" className="text-sm font-semibold leading-6 ">
-                    Log in <span aria-hidden="true">&rarr;</span>
-                  </Link> */}
-                  {user ? (
-                    <div className="flex items-center gap-4">
-                      Hey, {user.email}!
-                      <LogoutButton />
-                    </div>
-                  ) : (
-                    <div className="flex gap-2.5">
-                      <Link
-                        href="/login"
-                        className="py-2 px-5 rounded no-underline border border-[#f25f14] text-[#f25f14]"
-                      >
-                        Login
-                      </Link>
-                      <Link
-                        href="/signup"
-                        className="py-2 px-5 rounded no-underline bg-[#f25f14] text-white hover:bg-btn-background-hover"
-                        // className="py-2 px-4 rounded-md no-underline bg-btn-background hover:bg-btn-background-hover"
-                      >
-                        Signup
-                      </Link>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </div>
-
-          </nav>
-          <div className="text-foreground z-100  relative w-full  px-6 py-36 mx-auto md:px-12 xl:py-40 ">
+          <div className="text-foreground z-100  relative w-full flex items-center justify-center px-2 mx-auto my-auto md:px-4  py-40 xl:py-40 ">
             <div className="h-screen flex items-center justify-center ">
               <div className="flex h-full flex-col  items-center mb-4 ">
                 <p className={`${montserrat.className} text-xl text-white md:text-[56px] transition  font-medium lg:text-[84px] md:font-bold !leading-tight mx-auto max-w-lg md:max-w-3xl text-center my-6 md:my-12`}>
                 <strong>Amazing Travel { ' '}
                   Experiences</strong> 
                 </p>
-              <p className={`${montserrat.className} text-base text-white lg:text-xl font-light md:font-normal md:!leading-tight mx-auto max-w-lg md:max-w-3xl text-center mb-6 md:mb-8 lg:mb-12`}>
+              <p className={`${montserrat.className} text-base flex text-white lg:text-xl font-light md:font-normal md:!leading-tight mx-auto max-w-lg md:max-w-3xl text-center mb-6 md:mb-8 lg:mb-12`}>
                   We got you covered with the best destination <br /> for your next travel
                 </p>
-                <div className=' md:bg-background  rounded-3xl mt-12  w-full p-8'>
+                <div className=' md:bg-background  rounded-3xl mt-12  w-full md:p-8'>
                   <HeroForm />
                 
                 </div>
@@ -349,7 +314,7 @@ export default async function Index() {
         </div>
 
         <NewsLetter />
-        <Footer />
+        {/* <Footer /> */}
         
       </div>
     </Suspense>

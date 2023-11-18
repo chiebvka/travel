@@ -1,5 +1,5 @@
-import Image from 'next/image'
 import React from 'react'
+import Image from 'next/image';
 import rio from "@/app/images/rio.jpeg";
 import LocationCard from '@/components/LocationCard';
 import Footer from '@/components/Footer';
@@ -10,7 +10,7 @@ type Props = {}
 
 export default function page({}: Props) {
   return (
-    <div  className='text-foreground w-9/12 absolute right-0'>
+    <div  className='text-foreground  px-4 '>
         <div className=" w-full">
             <div className="w-full lg:mx-auto xl:mx-auto ">
                 <div className="flex w-full mx-auto relative md:h-[35vh] h-[20vh] ">
@@ -43,7 +43,6 @@ export default function page({}: Props) {
             <LocationCard />
         </div>
         <LoadButton content={"View More"} />
-        <Footer />
     </div>
   )
 }

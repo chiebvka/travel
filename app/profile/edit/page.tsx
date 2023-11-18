@@ -15,8 +15,8 @@ type Props = {}
 
 export default function page({}: Props) {
   return (
-    <div  className='text-white w-9/12 border-2  border-purple-600 absolute right-0'>
-                <div className="border-2 border-white w-full">
+    <div  className='text-white w-full border-2  border-purple-600 '>
+        <div className="border-2 border-white w-full">
             <div className="w-full lg:mx-auto xl:mx-auto ">
                 <div className="flex w-full mx-auto relative md:h-[35vh] h-[20vh] ">
                     <Image className="w-full h-full object-cover" src={rio} alt='Mountain' />
@@ -63,16 +63,14 @@ export default function page({}: Props) {
                         placeholder="••••••••"
                         required
                     />
-                    <button className="bg-[#f25f14] rounded px-4 py-2 text-white mb-2">
+                    <button className="bg-primary rounded px-4 py-2 text-white mb-2">
                         Update Profile
                     </button>
                     <Messages />
                     </form>
                 </div>
             </div>
-        
-        </div>
-        
+        </div>    
     </div>
   )
 }
