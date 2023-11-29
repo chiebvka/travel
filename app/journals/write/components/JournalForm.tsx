@@ -86,7 +86,7 @@ interface JournalFormProps {
 
 export default function JournalForm({ session, userId }: JournalFormProps) {
   const projectId = process.env.NEXT_PUBLIC_SUPABASE_PROJECT_ID;
-  const cdnurl = `https://${projectId}.supabase.co/storage/v1/object/public/journals/${userId}`
+  const cdnurl = `https://${projectId}.supabase.co/storage/v1/object/public/journals/`
   const router = useRouter();
   const supabase = createClientComponentClient();
 
@@ -127,11 +127,11 @@ export default function JournalForm({ session, userId }: JournalFormProps) {
         toast.error(journalConfig.errorCreate);
       }
     }
-      async function getImages() {
+    async function getImages() {
     const { data, error } = await supabase
       .storage
       .from("journals")
-      .list(userId + "/", {
+      .list('', {
         limit: 100,
         offset: 0,
         sortBy: { column: "name", order: "asc" }
@@ -165,6 +165,7 @@ export default function JournalForm({ session, userId }: JournalFormProps) {
       // places: datas.places || '',
       place_id: placeId || undefined,
       user_id: userId,
+      imageUrl: datas.imageUrl,
 
 
     };
@@ -197,7 +198,10 @@ export default function JournalForm({ session, userId }: JournalFormProps) {
         const { data, error } = await supabase
           .storage
           .from("journals")
-          .upload(userId + "/" + uuidv4(), file);
+          .upload(userId + "/" + uuidv4(), file)
+          cacheControl: '3600' // You can adjust cache control based on your needs
+          contentType: file.type // Set the content type based on the selected file
+          dangerouslyAllowSVG: true
   
         if (data) {
           toast.success(journalConfig.imageSuccess);
@@ -208,6 +212,7 @@ export default function JournalForm({ session, userId }: JournalFormProps) {
       
           // Set the image URL in your form or state, or wherever you need it
           form.setValue('imageUrl', imageUrl);
+          console.log(imageUrl)
 
           // Add the uploaded image to the images state
           setImages([...images, data]);
@@ -267,7 +272,22 @@ export default function JournalForm({ session, userId }: JournalFormProps) {
                 </FormItem>
               )}
            />
-
+          <FormField
+                control={form.control}
+                name='imageUrl'
+                render={({ field }) => (
+                  <FormItem className='col-span-full'>
+                    <FormLabel>Selected Image</FormLabel>
+                    <FormControl>
+                      {field.value && (
+                        <div className='mt-2'>
+                          <Image alt='' src={field.value} width={100} height={100} />
+                        </div>
+                      )}
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
 
           <FormField
             control={form.control}
