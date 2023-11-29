@@ -5,18 +5,18 @@ import Navbar from './Navbar'
 import UserNavigation from './UserNavigation'
 import { Button } from './ui/button'
 import Link from 'next/link'
-import { ModeToggle } from './ModeToggle'
+import { ModeToggle } from './ModeToggle';
 
 type Props = {}
 
 export default async function Headings({}: Props) {
-    const supabase = createServerComponentClient({ cookies })
+  const supabase = createServerComponentClient({ cookies })
 
 
-    const {
-        data: { user },
-      } = await supabase.auth.getUser()
-    
+  const {
+      data: { user },
+    } = await supabase.auth.getUser()
+  
   return (
     <div className=' flex justify-between bg-transparent z-20 w-11/12 lg:w-full mx-auto'>
     <Navbar />

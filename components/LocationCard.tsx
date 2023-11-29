@@ -14,7 +14,7 @@ export default function LocationCard({}: Props) {
   return (
     <div className='w-full px-2 border-t  mt-4 '> 
         <div className="flex">
-            <Link href="/" className=" mt-4 flex  rounded-lg p-3">
+            <Link href="/profile" className=" mt-4 flex  rounded-lg p-3">
             <Image
                 width={20}
                 height={20}

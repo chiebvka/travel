@@ -27,7 +27,7 @@ export default function page({}: Props) {
                     <Link href="/profile/edit">
                         <button className=" block rounded-lg bg-gray-900 hover:shadow-lg font-semibold text-xs md:text-base text-white px-6 py-2">Edit Profile</button>
                     </Link>
-                    <Link href="/">
+                    <Link href="/journals/write">
                         <button className=" block rounded-lg bg-gray-900 hover:shadow-lg font-semibold text-xs md:text-base text-white px-6 py-2">Write Post</button>
                     </Link>
                 </div>

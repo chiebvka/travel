@@ -1,7 +1,8 @@
 import { ThemeProvider } from '@/components/ThemeProvider';
-import './globals.css'
+import './globals.css';
 import Headings from '@/components/Headings';
 import Footer from '@/components/Footer';
+import { Toaster } from "react-hot-toast";
 
 export const metadata = {
   title: 'Travel Journall App',
@@ -10,7 +11,8 @@ export const metadata = {
 
 export const dynamic = "force-dynamic";
 
-export default function RootLayout({
+
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
@@ -34,6 +36,7 @@ export default function RootLayout({
             <Footer />
           </ThemeProvider>
         </main>
+        <Toaster position="bottom-right" />
       </body>
     </html>
   )
