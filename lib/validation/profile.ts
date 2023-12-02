@@ -13,6 +13,7 @@ export const profileFormSchema = z.object({
     }),
   username: z.string().optional(),
   avatarUrl: z.string().optional(),
+  coverUrl: z.string().optional(),
   trade: z.string().optional(),
 });
 
@@ -22,5 +23,6 @@ export const profileSchema = z.object({
   lastname: z.string(),
   username: z.string().optional(),
   avatarUrl: z.string().optional(),
+  coverUrl: z.string().optional(),
   trade: z.string().optional(),
 });

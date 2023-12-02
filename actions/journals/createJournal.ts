@@ -38,12 +38,3 @@ export async function CreateJournal(context: z.infer<typeof journalFormSchema>, 
           return false;
     }
 }
-
-
-export async function uploadjournal() {
-    try {
-        
-    } catch (error) {
-        
-    }
-}

@@ -27,7 +27,7 @@ export default async function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <nav className="w-full flex justify-center  bg-transparent mb-4 z-10  h-16">
+            <nav className="w-full border-2 border-primary flex justify-center  bg-transparent mb-4 z-10  h-16">
               <div className="w-full max-w-7xl md:max-w-6xl flex  justify-between items-center p-3 text-sm text-foreground absolute mx-auto inset-x-0 top-0 z-50">
                 <Headings />
               </div>

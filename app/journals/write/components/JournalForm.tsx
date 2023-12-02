@@ -54,6 +54,7 @@ import PlacesPage from '../../../places/page';
 import { Label } from '@/components/ui/label';
 import { getImageSize } from 'next/dist/server/image-optimizer';
 import Image from 'next/image';
+import { MdDelete } from 'react-icons/md';
 
 
 type JournalFormValues = z.infer<typeof journalFormSchema>;
@@ -106,6 +107,7 @@ export default function JournalForm({ session, userId }: JournalFormProps) {
   });
 
 
+
   useEffect(() => {
     async function fetchData() {
       try {
@@ -143,11 +145,11 @@ export default function JournalForm({ session, userId }: JournalFormProps) {
       } else {
         toast.error("Error loading images")
       }
-  }
-
+    }
+ 
     fetchData();
-    getImages()
-  }, []);
+    getImages();
+  }, [userId]);
 
 
 
@@ -176,7 +178,6 @@ export default function JournalForm({ session, userId }: JournalFormProps) {
 
     const response = await CreateJournal(journalData, userId);
 
-    console.log(datas);
 
     if (response) {
       toast.success(journalConfig.successCreate);
@@ -226,6 +227,38 @@ export default function JournalForm({ session, userId }: JournalFormProps) {
   
     setIsUpdating(false);
   }
+
+  const getImageNameFromUrl = (imageUrl: string): string => {
+    const parts = imageUrl.split('/');
+    return parts[parts.length - 1];
+  };
+  
+  const deleteImage = async (imageName: string) => {
+    setIsUpdating(true);
+    try {
+      const { error } = await supabase
+        .storage
+        .from("journals")
+        .remove([userId + "/" + imageName]);
+
+      if (error) {
+        toast.error("Could not delete image");
+      } else {
+        // Remove the deleted image from the images state
+        const updatedImages = images.filter((image) => image.name !== imageName);
+        setImages(updatedImages);
+
+        toast.success("Image deleted successfully");
+      }
+       // Refresh the page after successful deletion
+       window.location.reload();
+    } catch (error) {
+      console.error(error);
+      toast.error("An error occurred while deleting the image");
+    }
+    setIsUpdating(false);
+  };
+
   
 
   return (
@@ -280,14 +313,19 @@ export default function JournalForm({ session, userId }: JournalFormProps) {
                     <FormLabel>Selected Image</FormLabel>
                     <FormControl>
                       {field.value && (
-                        <div className='mt-2'>
-                          <Image alt='' src={field.value} width={100} height={100} />
+                        <div className='mt-2 border-2 relative border-red-600'>
+                          <Image alt='' src={field.value} width={100} height={100} className='w-1/5 object-cover h-44 border-2' />
+                            {/* <span className='border-2 border-primary absolute bottom-0 left-2 text-primary rounded-full text-3xl '>
+                            <MdDelete /> delete
+                          </span> */}
+                            <Button className='mt-2'  disabled={isUpdating} onClick={() => field.value && deleteImage(getImageNameFromUrl(field.value))}variant="destructive">Delete Image</Button>
                         </div>
                       )}
+
                     </FormControl>
                   </FormItem>
                 )}
-              />
+                />
 
           <FormField
             control={form.control}

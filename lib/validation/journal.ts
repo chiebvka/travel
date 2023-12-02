@@ -21,7 +21,6 @@ export const profileSchema = z.object({
     dov: z.date(),
     place_id: z.string(),
     user_id:z.string().optional(),
-    // places: z.string().optional(),
     imageUrl: z.string().url().optional(),
     experience: z.string(),
 })

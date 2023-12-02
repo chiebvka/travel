@@ -2,12 +2,12 @@
 
 import { profileSchema } from "@/lib/validation/profile";
 import { createClient } from "@/utils/supabase/server";
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import * as z from "zod";
 
-export async function UpdateSettings(context: z.infer<typeof profileSchema>) {
-  const cookieStore = cookies();
-  const supabase = createClient(cookieStore);
+export async function editProfile(context: z.infer<typeof profileSchema>) {
+  const supabase = createServerComponentClient({ cookies });
   try {
     const profile = profileSchema.parse(context);
     const { data, error } = await supabase
@@ -16,7 +16,8 @@ export async function UpdateSettings(context: z.infer<typeof profileSchema>) {
         username: profile.username,
         firstname: profile.firstname,
         lastname: profile.lastname,
-        avatar_url: profile.avatarUrl,
+        avatarUrl: profile.avatarUrl,
+        coverUrl: profile.coverUrl,
         trade: profile.trade,
       })
       .eq("id", profile.id);

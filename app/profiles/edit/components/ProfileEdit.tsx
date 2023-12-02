@@ -36,7 +36,7 @@ import rio from "../../../../public/images/04.png";
 import { profileFormSchema } from '@/lib/validation/profile';
 import { Profile } from '@/types/collection';
 import { createClient } from '@/utils/supabase/client';
-import { UpdateSettings } from '@/actions/profile/updateSettings';
+import { editProfile } from '@/actions/profile/editProfile';
 import { shimmer, toBase64 } from "@/lib/utils";
 import Image from 'next/image';
 import { Separator } from '@/components/ui/separator';
@@ -91,7 +91,7 @@ export default function ProfileEdit({user}: ProfileProps) {
     async function onSubmit(data: ProfileFormValues) {
       setIsUpdating(true);
   
-      const response = await UpdateSettings({
+      const response = await   editProfile({
         id: user.id,
         firstname: data.firstname,
         lastname: data.lastname,

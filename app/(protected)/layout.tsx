@@ -1,5 +1,6 @@
 
 import { createClient } from "@/utils/supabase/server";
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import React from "react";
@@ -12,7 +13,7 @@ export default async function RootLayout({
 }) {
 
     const cookieStore = cookies();
-  const supabase = createClient(cookieStore);
+  const supabase = createServerComponentClient({ cookies });
 
   const {
     data: { session },
@@ -23,7 +24,8 @@ export default async function RootLayout({
     redirect("/login");
   }
   return (
-            <>
-            </>
+          <>
+            {children}
+          </>
   )
 }

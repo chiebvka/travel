@@ -136,7 +136,8 @@ export interface Database {
       }
       profiles: {
         Row: {
-          avatar_url: string | null
+          avatarUrl: string | null
+          coverUrl: string | null
           email: string | null
           firstname: string | null
           id: string
@@ -145,7 +146,8 @@ export interface Database {
           username: string | null
         }
         Insert: {
-          avatar_url?: string | null
+          avatarUrl?: string | null
+          coverUrl?: string | null
           email?: string | null
           firstname?: string | null
           id: string
@@ -154,7 +156,8 @@ export interface Database {
           username?: string | null
         }
         Update: {
-          avatar_url?: string | null
+          avatarUrl?: string | null
+          coverUrl?: string | null
           email?: string | null
           firstname?: string | null
           id?: string

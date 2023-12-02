@@ -49,7 +49,7 @@ export default function Navbar({}: Props) {
       <div className="hidden md:flex mt-2  lg:flex-1">
         <Link href="/" className="-m-1.5 flex p-1.5">
           <span className="sr-only">Your Company</span>
-          <h1 className={`${cavet.className} h-8 md:text-4xl text-2xl z-10 text-white  w-auto`}>mytraveljournal.</h1>
+          <h1 className={`${cavet.className} h-8 md:text-4xl text-2xl z-10 text-foreground  w-auto`}>mytraveljournal.</h1>
         </Link>
       </div>
       <div className="flex mt-2 lg:hidden">
@@ -202,7 +202,7 @@ export default function Navbar({}: Props) {
       </div>
       <div className="hidden mt-2 lg:flex lg:gap-x-12 items-center">
         {dashBoardMenusLoop.map((item) => (
-          <Link key={item.title} href={item.slug || "/"} className=" text-white md:text-xl text-base hover:opacity-60 font-normal leading-6 ">
+          <Link key={item.title} href={item.slug || "/"} className=" text-foreground md:text-xl text-base hover:opacity-60 font-normal leading-6 ">
             {item.title}
           </Link>
         ))}

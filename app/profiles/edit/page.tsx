@@ -1,23 +1,16 @@
 import React from 'react'
-import Messages from '@/app/signup/messages'
-import Link from 'next/link'
-import rio from "../../../public/images/04.png";
-import { Caveat, Montserrat } from 'next/font/google'
-import Image from 'next/image'
+
 import ProfileEdit from './components/ProfileEdit';
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
-import { Database } from '@/types/supabase';
 import { cookies } from "next/headers";
 import { Profile } from '@/types/collection';
 import { notFound } from 'next/navigation';
 import toast from 'react-hot-toast';
-import { createClient } from '@/utils/supabase/server';
 
 
 
 
-const cavet = Caveat({ subsets: ['latin'] })
-const montserrat = Montserrat({ subsets: ['latin'] })
+
 
 
 
