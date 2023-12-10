@@ -2,6 +2,13 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import LoginForm from './components/LoginForm';
+import type { Metadata } from 'next';
+
+
+export const metadata:Metadata = {
+  title: 'Travel Journal App',
+  description: 'Login to travel journal',
+}
 
 
 export default async function Login() {

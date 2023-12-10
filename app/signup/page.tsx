@@ -3,6 +3,13 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import SignupForm from "./components/SignupForm";
+import type { Metadata } from 'next';
+
+
+export const metadata:Metadata = {
+  title: 'Travel Journal App',
+  description: 'Sign up to travel journal',
+}
 
 
 

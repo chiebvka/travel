@@ -30,8 +30,6 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { CalendarX2Icon, CheckIcon, Loader2 as SpinnerIcon } from "lucide-react";
 import toast from "react-hot-toast";
-import { Separator } from '@/components/ui/separator';
-import { AiOutlinePicture } from 'react-icons/ai';
 import { journalFormSchema } from '@/lib/validation/journal';
 import { useRouter } from 'next/navigation';
 import { CreateJournal } from '@/actions/journals/createJournal';
@@ -49,63 +47,45 @@ import {
 } from "@/components/ui/command"
 import { Textarea } from '@/components/ui/textarea';
 import { PhotoIcon } from '@heroicons/react/24/outline';
-import PlacesPage from '../../../places/page';
 import { Label } from '@/components/ui/label';
 import { getImageSize } from 'next/dist/server/image-optimizer';
 import Image from 'next/image';
 import { MdDelete } from 'react-icons/md';
 
-
 type JournalFormValues = z.infer<typeof journalFormSchema>;
 
-const languages = [
-  { label: "English", value: "en" },
-  { label: "French", value: "fr" },
-  { label: "German", value: "de" },
-  { label: "Spanish", value: "es" },
-  { label: "Portuguese", value: "pt" },
-  { label: "Russian", value: "ru" },
-  { label: "Japanese", value: "ja" },
-  { label: "Korean", value: "ko" },
-  { label: "Chinese", value: "zh" },
-] as const
-
 interface Place {
-  id: string;
-  title: string;
-}
-
-interface JournalFormProps {
-  session: any;
-  userId: string | null; // Adjust the type accordingly
-}
-
- 
-
-// ... (previous imports)
-
-export default function JournalForm({ session, userId }: JournalFormProps) {
-  const projectId = process.env.NEXT_PUBLIC_SUPABASE_PROJECT_ID;
-  const cdnurl = `https://${projectId}.supabase.co/storage/v1/object/public/journals/`
-  const router = useRouter();
-  const supabase = createClientComponentClient();
-
-  const [places, setPlaces] = useState<Place[]>([]);
-  const [images, setImages] = useState<any[]>([]);
-  const [isUpdating, setIsUpdating] = useState<boolean>(false);
+    id: string;
+    title: string;
+  }
   
-  const [error, setError] = useState<string | null>(null);
+  interface JournalFormProps {
+    // session: any;
+    userId: string | null; // Adjust the type accordingly
+  }
+
+type Props = {}
+
+export default function JournalForm({  userId }: JournalFormProps) {
+    const projectId = process.env.NEXT_PUBLIC_SUPABASE_PROJECT_ID;
+    const cdnurl = `https://${projectId}.supabase.co/storage/v1/object/public/journals/`
+    const router = useRouter();
+    const supabase = createClientComponentClient();
   
-  const defaultValues: Partial<JournalFormValues> = {};
-  const [showModal, setShowModal] = useState<boolean>(false);
-
-  const form = useForm<JournalFormValues>({
-    resolver: zodResolver(journalFormSchema),
-    defaultValues,
-    mode: 'onChange',
-  });
-
-
+    const [places, setPlaces] = useState<Place[]>([]);
+    const [images, setImages] = useState<any[]>([]);
+    const [isUpdating, setIsUpdating] = useState<boolean>(false);
+    
+    // const [error, setError] = useState<string | null>(null);
+    
+    const defaultValues: Partial<JournalFormValues> = {};
+    // const [showModal, setShowModal] = useState<boolean>(false);
+  
+    const form = useForm<JournalFormValues>({
+      resolver: zodResolver(journalFormSchema),
+      defaultValues,
+      mode: 'onChange',
+    });
 
   useEffect(() => {
     async function fetchData() {
@@ -152,8 +132,6 @@ export default function JournalForm({ session, userId }: JournalFormProps) {
 
 
 
-
-
   async function onSubmit(datas: JournalFormValues) {
     setIsUpdating(true);
     const selectedPlace = places.find((place) => place.title === datas.place_id);
@@ -181,7 +159,7 @@ export default function JournalForm({ session, userId }: JournalFormProps) {
     if (response) {
       toast.success(journalConfig.successCreate);
       
-      router.push(`/journals`);
+      router.push(`/profile`);
     } else {
       toast.error(journalConfig.errorCreate);
     }
@@ -212,7 +190,6 @@ export default function JournalForm({ session, userId }: JournalFormProps) {
       
           // Set the image URL in your form or state, or wherever you need it
           form.setValue('imageUrl', imageUrl);
-          console.log(imageUrl)
 
           // Add the uploaded image to the images state
           setImages([...images, data]);
@@ -258,200 +235,196 @@ export default function JournalForm({ session, userId }: JournalFormProps) {
     setIsUpdating(false);
   };
 
-  
 
   return (
     <div className='w-10/12 border'>
-      <Form {...form}>
+        <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className='w-full space-y-8'>
-          <FormField
+            <FormField
             control={form.control}
             name='title'
             render={({ field }) => (
-              <FormItem>
+                <FormItem>
                 <FormLabel>Name</FormLabel>
                 <FormControl>
-                  <Input placeholder='Your name' {...field} />
+                    <Input placeholder='Your name' {...field} />
                 </FormControl>
                 <FormDescription>
-                  This is the name that will be displayed on your profile and in emails.
+                    This is the name that will be displayed on your profile and in emails.
                 </FormDescription>
                 <FormMessage />
-              </FormItem>
+                </FormItem>
             )}
-          />
+            />
 
-          <FormField
-              control={form.control}
-              name='imageUrl'
-              render={({ field }) => (
+            <FormField
+                control={form.control}
+                name='imageUrl'
+                render={({ field }) => (
                 <FormItem className='col-span-full '>
-                  <FormLabel>Cover Photo</FormLabel>
-                  <FormControl>
+                    <FormLabel>Cover Photo</FormLabel>
+                    <FormControl>
                     <div className='mt-2 flex flex-col justify-center rounded-lg border border-dashed border-primary px-6 py-10'>
-                      <div className="text-center">
+                        <div className="text-center">
                         <PhotoIcon className='mx-auto h-12 w-12 text-gray-300' aria-hidden='true' />
                         <Label htmlFor="picture" className='relative cursor-pointer rounded-md  font-semibold text-primary '>
                         <span>Upload a file</span>
                         <Input id="picture" type="file" className='sr-only' onChange={(e) => uploadImage(e)}  />
                         </Label>
                         <p className='text-xs text-foreground pl-1'>or drag and drop</p>
-                      </div>
-                      <p className='text-xs text-foreground text-center leading-5 '>PNG, JPG, GIF up to 10MB</p>
+                        </div>
+                        <p className='text-xs text-foreground text-center leading-5 '>PNG, JPG, GIF up to 10MB</p>
                     </div>
 
-                  </FormControl>
+                    </FormControl>
                 </FormItem>
-              )}
-           />
+                )}
+            />
 
 
-          <FormField
+            <FormField
                 control={form.control}
                 name='imageUrl'
                 render={({ field }) => (
-                  <FormItem className='col-span-full'>
+                    <FormItem className='col-span-full'>
                     <FormLabel>Selected Image</FormLabel>
                     <FormControl>
-                      {field.value && (
+                        {field.value && (
                         <div className='mt-2 border-2 relative border-red-600'>
-                          <Image alt='' src={field.value} width={100} height={100} className='w-1/5 object-cover h-44 border-2' />
+                            <Image alt='' src={field.value} width={100} height={100} className='w-1/5 object-cover h-44 border-2' />
                             {/* <span className='border-2 border-primary absolute bottom-0 left-2 text-primary rounded-full text-3xl '>
                             <MdDelete /> delete
-                          </span> */}
+                            </span> */}
                             <Button className='mt-2'  disabled={isUpdating} onClick={() => field.value && deleteImage(getImageNameFromUrl(field.value))} 
                             variant="destructive">Delete Image</Button>
                         </div>
-                      )}
+                        )}
 
                     </FormControl>
-                  </FormItem>
+                    </FormItem>
                 )}
                 />
 
-          <FormField
+            <FormField
             control={form.control}
             name='dov'
             render={({ field }) => (
-              <FormItem className='flex flex-col'>
+                <FormItem className='flex flex-col'>
                 <FormLabel>Date of birth</FormLabel>
                 <Popover>
-                  <PopoverTrigger asChild>
+                    <PopoverTrigger asChild>
                     <FormControl>
-                      <Button
+                        <Button
                         variant={'outline'}
                         className={cn(' pl-3 text-left font-normal', !field.value && 'text-muted-foreground')}
-                      >
+                        >
                         {field.value ? format(field.value, 'PPP') : <span>Pick a date</span>}
                         <CalendarX2Icon className='ml-auto h-4 w-4 opacity-50' />
-                      </Button>
+                        </Button>
                     </FormControl>
-                  </PopoverTrigger>
-                  <PopoverContent className='w-auto p-0' align='start'>
+                    </PopoverTrigger>
+                    <PopoverContent className='w-auto p-0' align='start'>
                     <Calendar
-                      mode='single'
-                      selected={field.value}
-                      onSelect={field.onChange}
-                      disabled={(date) => date > new Date() || date < new Date('1900-01-01')}
-                      initialFocus
+                        mode='single'
+                        selected={field.value}
+                        onSelect={field.onChange}
+                        disabled={(date) => date > new Date() || date < new Date('1900-01-01')}
+                        initialFocus
                     />
-                  </PopoverContent>
+                    </PopoverContent>
                 </Popover>
                 <FormDescription>Your date of birth is used to calculate your age.</FormDescription>
                 <FormMessage />
-              </FormItem>
+                </FormItem>
             )}
-          />
-          <FormField
+            />
+            <FormField
             control={form.control}
             name='place_id'
             render={({ field }) => (
-              <FormItem className='flex flex-col'>
+                <FormItem className='flex flex-col'>
                 <FormLabel>Language</FormLabel>
                 <Popover>
-                  <PopoverTrigger asChild>
+                    <PopoverTrigger asChild>
                     <FormControl>
-                      <Button
+                        <Button
                         variant='outline'
                         role='combobox'
                         className={cn(' justify-between', !field.value && 'text-muted-foreground')}
-                      >
+                        >
                         {field.value
-                          ? places.find((place) => place.title === field.value)?.title
-                          : 'Select language'}
+                            ? places.find((place) => place.title === field.value)?.title
+                            : 'Select language'}
                         <PiCaretUpDownBold className='ml-2 h-4 w-4 shrink-0 opacity-50' />
-                      </Button>
+                        </Button>
                     </FormControl>
-                  </PopoverTrigger>
-                  <PopoverContent className=' p-0'>
+                    </PopoverTrigger>
+                    <PopoverContent className=' p-0'>
                     <Command>
-                      <CommandInput placeholder='Search language...' />
-                      <CommandEmpty>No language found.</CommandEmpty>
-                      <CommandGroup>
+                        <CommandInput placeholder='Search language...' />
+                        <CommandEmpty>No language found.</CommandEmpty>
+                        <CommandGroup>
                         {places.map((place) => (
-                          <CommandItem
+                            <CommandItem
                             value={place.title}
                             key={place.title}
                             onSelect={() => {
-                              form.setValue('place_id', place.title);
+                                form.setValue('place_id', place.title);
                             }}
-                          >
+                            >
                             <CheckIcon
-                              className={cn(
+                                className={cn(
                                 'mr-2 h-4 w-4',
                                 place.title === field.value ? 'opacity-100' : 'opacity-0'
-                              )}
+                                )}
                             />
                             {place.title}
-                          </CommandItem>
+                            </CommandItem>
                         ))}
-                      </CommandGroup>
+                        </CommandGroup>
                     </Command>
-                  </PopoverContent>
+                    </PopoverContent>
                 </Popover>
                 <FormDescription>This is the language that will be used in the dashboard.</FormDescription>
                 <FormMessage />
-              </FormItem>
+                </FormItem>
             )}
-          />
-          <FormField
+            />
+            <FormField
             control={form.control}
             name='experience'
             render={({ field }) => (
-              <FormItem>
+                <FormItem>
                 <FormLabel>Bio</FormLabel>
                 <FormControl>
-                  <Textarea
+                    <Textarea
                     placeholder='Tell us a little bit about yourself'
                     className='resize-none'
                     {...field}
-                  />
+                    />
                 </FormControl>
                 <FormDescription>
-                  You can <span>@mention</span> other users and organizations to link to them.
+                    You can <span>@mention</span> other users and organizations to link to them.
                 </FormDescription>
                 <FormMessage />
-              </FormItem>
+                </FormItem>
             )}
-          />
-          <Button type='submit' disabled={isUpdating}>
+            />
+            <Button type='submit' disabled={isUpdating}>
             {journalConfig.submit}
-          </Button>
+            </Button>
         </form>
-      </Form>
-      <AlertDialog open={isUpdating} onOpenChange={setIsUpdating}>
+        </Form>
+        <AlertDialog open={isUpdating} onOpenChange={setIsUpdating}>
         <AlertDialogContent className='font-sans'>
-          <AlertDialogHeader>
+            <AlertDialogHeader>
             <AlertDialogTitle className='text-center'>{journalConfig.pleaseWait}</AlertDialogTitle>
             <AlertDialogDescription className='mx-auto text-center'>
-              <SpinnerIcon className='h-6 w-6 animate-spin' />
+                <SpinnerIcon className='h-6 w-6 animate-spin' />
             </AlertDialogDescription>
-          </AlertDialogHeader>
+            </AlertDialogHeader>
         </AlertDialogContent>
-      </AlertDialog>
+        </AlertDialog>
     </div>
-  );
+  )
 }
-
-
-

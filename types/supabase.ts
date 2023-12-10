@@ -44,13 +44,18 @@ export interface Database {
       }
       journals: {
         Row: {
+          [x: string]: any
           created_at: string
           dov: string | null
           experience: string | null
           id: string
           imageUrl: string | null
           place: string | null
-          place_id: string | null
+          place_id: {
+            title: string;
+            peak: string;
+            // other properties of the place_id
+          };
           title: string | null
           user: string | null
           user_id: string | null
@@ -62,7 +67,11 @@ export interface Database {
           id?: string
           imageUrl?: string | null
           place?: string | null
-          place_id?: string | null
+          place_id: {
+            title: string;
+            peak: string;
+            // other properties of the place_id
+          };
           title?: string | null
           user?: string | null
           user_id?: string | null
@@ -74,7 +83,11 @@ export interface Database {
           id?: string
           imageUrl?: string | null
           place?: string | null
-          place_id?: string | null
+          place_id: {
+            title: string;
+            peak: string;
+            // other properties of the place_id
+          };
           title?: string | null
           user?: string | null
           user_id?: string | null
@@ -136,6 +149,7 @@ export interface Database {
       }
       profiles: {
         Row: {
+          journals: any
           avatarUrl: string | null
           coverUrl: string | null
           email: string | null

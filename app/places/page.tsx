@@ -1,6 +1,13 @@
 import React from 'react';
 import DashHead from '@/components/DashHead';
 import Locations from '@/components/Locations';
+import type { Metadata } from 'next';
+
+
+export const metadata:Metadata = {
+  title: 'Travel Journal App - Top PLaces',
+  description: 'Most journaled places',
+}
 
 type Props = {}
 

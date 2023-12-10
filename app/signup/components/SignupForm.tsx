@@ -56,7 +56,7 @@ const handleSignUp = async () => {
         setLoading(false); 
         return;
       }
-      router.push("/")
+      router.push("/success")
       router.refresh()
     } catch (error) {
       console.error('Login failed', error);

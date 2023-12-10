@@ -1,6 +1,13 @@
 import React from 'react';
 import DashHead from '@/components/DashHead';
 import LocationCard from '@/components/LocationCard';
+import type { Metadata } from 'next';
+
+
+export const metadata:Metadata = {
+  title: 'Travel Journal App',
+  description: 'Top Journals',
+}
 
 
 export default function JournalsPage() {

@@ -94,6 +94,7 @@ export default function ProfileForm({user}: ProfilFormProps) {
 
       if(response) {
         toast.success(profileConfig.successMessage);
+        router.push("/profile")
       } else {
         toast.error(profileConfig.errorMessage)
       }

@@ -4,10 +4,17 @@ import Headings from '@/components/Headings';
 import Footer from '@/components/Footer';
 import { Toaster } from "react-hot-toast";
 
-export const metadata = {
-  title: 'Travel Journall App',
+import { Metadata } from 'next';
+
+
+export const metadata:Metadata = {
+  title: {
+    default:  'Travel Journal App',
+    template: "%s | Travel Journal App"
+  },
   description: 'Keep a journal from all your travels',
 }
+
 
 export const dynamic = "force-dynamic";
 

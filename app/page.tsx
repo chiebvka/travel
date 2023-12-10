@@ -39,8 +39,6 @@ const montserrat = Montserrat({  subsets: ["latin"] })
 export default async function Index() {
   const supabase = createServerComponentClient({ cookies })
 
-  // const cookieStore = cookies();
-  // const supabase = createClient(cookieStore);
 
   
 
