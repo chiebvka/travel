@@ -6,8 +6,8 @@ export default function JournalLoading({}: Props) {
   return (
     <div role="status" className="mx-auto hidden w-full flex-col items-center justify-center space-y-8 md:flex" >
         <div className="mx-auto flex w-full animate-pulse flex-row space-x-6 space-y-3 rounded-md border border-gray-200 p-4 shadow dark:border-gray-700 md:p-6">
-            <div className="flex flex-col md:w-6/12 w-full ">
-                <div className="mt-4 flex items-center space-x-3">
+            <div className="flex flex-col  md:w-6/12 w-full ">
+                <div className="mt-4 flex border-2 items-center space-x-3">
                 <svg
                     className="h-10 w-10 text-gray-200 dark:text-gray-700"
                     aria-hidden="true"

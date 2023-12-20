@@ -58,7 +58,12 @@ export interface Database {
           };
           title: string | null
           user: string | null
-          user_id: string | null
+          user_id:  {
+            avatarUrl: string;
+            trade: string;
+            username: string;
+            // other properties of the place_id
+          };
         }
         Insert: {
           created_at?: string
@@ -74,7 +79,12 @@ export interface Database {
           };
           title?: string | null
           user?: string | null
-          user_id?: string | null
+          user_id:  {
+            avatarUrl: string;
+            trade: string;
+            username: string;
+            // other properties of the place_id
+          };
         }
         Update: {
           created_at?: string
@@ -90,7 +100,12 @@ export interface Database {
           };
           title?: string | null
           user?: string | null
-          user_id?: string | null
+          user_id:  {
+            avatarUrl: string;
+            trade: string;
+            username: string;
+            // other properties of the place_id
+          };
         }
         Relationships: [
           {

@@ -11,22 +11,26 @@ type Props = {
 const montserrat = Montserrat({ subsets: ["latin"] })
 
 export default function PersonalJournal({journal}: Props) {
+  
+  const imageUrl = journal.imageUrl || '';
 
   return (
     <>
       <div className='w-full px-2 border-t  mt-4 '> 
         <Link href={`/journal/${journal.id}`} className="flex md:flex-row group flex-col my-5">
-            <div className="flex md:w-6/12 w-full rounded-lg ">
-                <div className="flex w-full my-8 md:my-0 mx-auto relative h-80  rounded-lg">               
-                    <Image 
-                        src={journal.imageUrl || ''} 
-                        alt={journal.title || ''} 
-                        fill={true}
-                        blurDataURL='blur'
-                        placeholder='blur'
-                        className='w-full h-full transition duration-300 ease-in-out object-cover group-hover:scale-90 rounded-lg' 
-                    />
+            <div className="flex md:w-6/12 w-full border-2 rounded-lg ">
+            {journal.imageUrl  && (
+                <div className="flex w-full my-8 md:my-0 mx-auto relative h-80 rounded-lg">
+                  <Image
+                    src={journal.imageUrl || ''}
+                    alt={journal.title || ''}
+                    fill={true}
+                    blurDataURL='blur'
+                    placeholder='blur'
+                    className='w-full h-full transition duration-300 ease-in-out object-cover group-hover:scale-90 rounded-lg'
+                  />
                 </div>
+              )}
             </div>
             <div className="md:w-6/12 w-full transition duration-300 ease-in-out group-hover:scale-105 rounded-lg lg:px-8 md:px-4 px-4 md:ml-3 ">
                 <div className="flex mt-5">
