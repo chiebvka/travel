@@ -7,8 +7,11 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import {
     AlertDialog,
+    AlertDialogAction,
+    AlertDialogCancel,
     AlertDialogContent,
     AlertDialogDescription,
+    AlertDialogFooter,
     AlertDialogHeader,
     AlertDialogTitle,
   } from "@/components/ui/alert-dialog";
@@ -25,10 +28,10 @@ import { PiCaretUpDownBold } from "react-icons/pi";
 import {
   Popover,
   PopoverContent,
-  PopoverTrigger } from "@/components/ui/popover"
+  PopoverTrigger } from "@/components/ui/popover";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { CalendarX2Icon, CheckIcon, SparklesIcon, Loader2 as SpinnerIcon } from "lucide-react";
+import { CalendarX2Icon, CheckIcon, SparklesIcon,   MoreVertical as ElipsisIcon, Trash as TrashIcon, Loader2 as SpinnerIcon } from "lucide-react";
 import toast from "react-hot-toast";
 import { journalFormSchema } from '@/lib/validation/journal';
 import { useRouter } from 'next/navigation';
@@ -56,6 +59,7 @@ import Image from 'next/image';
 import { MdDelete } from 'react-icons/md';
 import { Journal } from '../../../../../types/collection';
 import { UpdateJournal } from '@/actions/journals/updateJournal';
+import { DeleteJournal } from '@/actions/journals/deleteJournal';
 
 type JournalFormValues = z.infer<typeof journalFormSchema>;
 
@@ -82,7 +86,8 @@ export default function EditJournal({  userId, journal }: JournalFormProps) {
 
   const [places, setPlaces] = useState<Place[]>([]);
   const [images, setImages] = useState<any[]>([]);
-  
+  const [showDeleteAlert, setShowDeleteAlert] = useState<boolean>(false);
+  const [isDeleteLoading, setIsDeleteLoading] = useState<boolean>(false);
   const [content, setContent] = useState<string | null>(journal?.content || null);
   const [isUpdating, setIsUpdating] = useState<boolean>(false);
   
@@ -160,7 +165,7 @@ async function onSubmit(datas: JournalFormValues) {
   const journalData = {
     id: journal?.id,
     title: datas.title || '',
-    dov: datas.dov,
+    dov: datas.dov || new Date(), 
     experience: datas.experience || '',
     slug: datas.slug || '',
     place_id: placeId || undefined,
@@ -259,6 +264,34 @@ const deleteImage = async (imageName: string) => {
   setIsUpdating(false);
 };
 
+  // Delete post
+  async function deleteJournal() {
+    setIsDeleteLoading(true);
+    if (journal) {
+      const journalData = {
+        id: journal?.id,
+        title: journal?.title || '', // Add other required properties here
+        slug: journal?.slug || '',
+        dov: journal?.dov ? parse(journal.dov, 'yyyy-MM-dd', new Date()) : new Date(), 
+        experience: journal?.experience || '',
+        place_id: journal?.place_id?.title || '',
+        imageUrl: journal?.imageUrl || '',
+        // Add other properties as needed
+      };
+      const response = await DeleteJournal(journalData);
+      if (response) {
+        setIsDeleteLoading(false);
+        toast.success(journalConfig.successDelete);
+        router.push(`/profile`);  // Redirect to profile page after successful deletion
+      } else {
+        setIsDeleteLoading(false);
+        toast.error(journalConfig.errorDelete);
+      }
+    } else {
+      setIsDeleteLoading(false);
+      toast.error(journalConfig.errorDelete);
+    }
+  }
 
 return (
   <div className='w-10/12 border'>
@@ -463,19 +496,44 @@ return (
           <Button type='submit' className='mr-3' disabled={isUpdating}>
           {journalConfig.update}
           </Button>
-          <Button variant="destructive">Delete Journal</Button>
       </form>
       </Form>
-      <AlertDialog open={isUpdating} onOpenChange={setIsUpdating}>
-      <AlertDialogContent className='font-sans'>
-          <AlertDialogHeader>
-          <AlertDialogTitle className='text-center'>{journalConfig.pleaseWait}</AlertDialogTitle>
-          <AlertDialogDescription className='mx-auto text-center'>
-              <SpinnerIcon className='h-6 w-6 animate-spin' />
-          </AlertDialogDescription>
-          </AlertDialogHeader>
-      </AlertDialogContent>
-      </AlertDialog>
+          <Button variant="destructive" className='mt-3' onClick={() => setShowDeleteAlert(true)}>Delete Journal</Button>
+          {/* Delete alert */}
+          <AlertDialog open={showDeleteAlert} onOpenChange={setShowDeleteAlert}>
+            <AlertDialogContent className="text-md font-sans">
+              <AlertDialogHeader>
+                <AlertDialogTitle>
+                  {journalConfig.questionDelete}
+                </AlertDialogTitle>
+                <AlertDialogDescription>
+                  {journalConfig.warning}
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel>{journalConfig.cancel}</AlertDialogCancel>
+                <AlertDialogAction onClick={deleteJournal}>
+                  {isDeleteLoading ? (
+                    <SpinnerIcon className="mr-2 h-4 w-4 animate-spin" />
+                  ) : (
+                    <TrashIcon className="mr-2 h-4 w-4" />
+                  )}
+                  <span>{journalConfig.confirm}</span>
+                </AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
+          {/* Loading alert */}
+          <AlertDialog open={isUpdating} onOpenChange={setIsUpdating}>
+          <AlertDialogContent className='font-sans'>
+              <AlertDialogHeader>
+              <AlertDialogTitle className='text-center'>{journalConfig.pleaseWait}</AlertDialogTitle>
+              <AlertDialogDescription className='mx-auto text-center'>
+                  <SpinnerIcon className='h-6 w-6 animate-spin' />
+              </AlertDialogDescription>
+              </AlertDialogHeader>
+          </AlertDialogContent>
+          </AlertDialog>
   </div>
   )
 }

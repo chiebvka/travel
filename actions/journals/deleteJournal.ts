@@ -8,14 +8,14 @@ import { cookies } from "next/headers";
 import * as z from "zod";
 
 
-export async function DeleteJournal(context: z.infer<typeof journalFormSchema>, userId: string | null){
+export async function DeleteJournal(context: z.infer<typeof journalFormSchema>){
     try {
         const supabase = createServerComponentClient({ cookies })
         const journal = journalDeleteSchema.parse(context);
         const { data, error } = await supabase
         .from("journals")
         .delete()
-        .match({id: journal.id, user_id:journal?.user_id})
+        .match({id: journal.id})
         .select()
 
         revalidatePath("/journals")
