@@ -460,9 +460,10 @@ return (
               </FormItem>
           )}
           />
-          <Button type='submit' disabled={isUpdating}>
+          <Button type='submit' className='mr-3' disabled={isUpdating}>
           {journalConfig.update}
           </Button>
+          <Button variant="destructive">Delete Journal</Button>
       </form>
       </Form>
       <AlertDialog open={isUpdating} onOpenChange={setIsUpdating}>
