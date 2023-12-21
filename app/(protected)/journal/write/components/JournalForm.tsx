@@ -28,7 +28,7 @@ import {
   PopoverTrigger } from "@/components/ui/popover"
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { CalendarX2Icon, CheckIcon, Loader2 as SpinnerIcon } from "lucide-react";
+import { CalendarX2Icon, CheckIcon, SparklesIcon, Loader2 as SpinnerIcon } from "lucide-react";
 import toast from "react-hot-toast";
 import { journalFormSchema } from '@/lib/validation/journal';
 import { useRouter } from 'next/navigation';
@@ -38,6 +38,7 @@ import { cn } from '@/lib/utils';
 import { format } from "date-fns"
 import { Calendar } from '@/components/ui/calendar';
 import { v4 as uuidv4 } from 'uuid';
+import slugify from "react-slugify";
 import {
   Command,
   CommandEmpty,
@@ -141,6 +142,7 @@ export default function JournalForm({  userId }: JournalFormProps) {
       title: datas.title || '',
       dov: datas.dov,
       experience: datas.experience || '',
+      slug: datas.slug || '',
       // places: datas.places || '',
       place_id: placeId || undefined,
       user_id: userId,
@@ -251,6 +253,32 @@ export default function JournalForm({  userId }: JournalFormProps) {
                 </FormControl>
                 <FormDescription>
                     This is the name that will be displayed on your profile and in emails.
+                </FormDescription>
+                <FormMessage />
+                </FormItem>
+            )}
+            />
+            <FormField
+            control={form.control}
+            name='slug'
+            render={({ field }) => (
+                <FormItem>
+                <FormLabel>Slug</FormLabel>
+                <FormControl>
+                    <Input placeholder='Your name' {...field} />
+                </FormControl>
+                <FormDescription>
+                  <Button
+                    type="button"
+                    size="sm"
+                    className="mt-2"
+                    onClick={() =>
+                      field.onChange(slugify(form.getValues("title")))
+                    }
+                  >
+                    <SparklesIcon className="mr-2 h-4 w-4" />
+                    Click to generate slug
+                  </Button>
                 </FormDescription>
                 <FormMessage />
                 </FormItem>

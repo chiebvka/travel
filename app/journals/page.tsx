@@ -8,6 +8,7 @@ import JournalLoading from '@/components/JournalLoading';
 import MainJournal from './components/MainJournal';
 import CommonPager from '@/components/common/CommonPager';
 import CommonPagination from '@/components/common/CommonPagination';
+import EmptyJournal from '../(protected)/profile/components/EmptyJournal';
 
 
 export const metadata:Metadata = {
@@ -64,13 +65,19 @@ if (!data || error || !data.length) {
   return (
     <div className='border-2 border-red-400 gap-14  w-full md:max-w-6xl px-3  text-foreground bg-background flex flex-col items-center'>
         <DashHead title={"Your Top News Feed"} subheading={"Here are some top suggestions of places to visit"} />
-        <div className="space-y-8">
+        <div className="space-y-8 w-10/12 mx-auto  ">
           <JournalLoading />
-          {data?.map((journal) => (
-            <Suspense key={journal.id} fallback={<JournalLoading />}>
-              <MainJournal journal={journal}  />
-            </Suspense>
-          ))}
+          {data?.length && data?.length > 0 ? (
+            <>
+              {data?.map((journal) => (
+                <Suspense key={journal.id} fallback={<JournalLoading />}>
+                  <MainJournal journal={journal}  />
+                </Suspense>
+              ))}
+            </>
+          ): (
+            <EmptyJournal />
+          )}
         </div>
         {/** Pagination */}
         <div className="w-full md:max-w-4xl px-3">

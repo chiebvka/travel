@@ -11,10 +11,17 @@ import Link from 'next/link';
 import JournalLoading from '@/components/JournalLoading';
 import LocationCard from '@/components/LocationCard';
 import { Montserrat } from 'next/font/google';
+import { seoData } from '@/config/main/seo';
+import { Metadata } from 'next';
 import Image from 'next/image';
 import PersonalJournal from './components/PersonalJournal';
+import EmptyJournal from './components/EmptyJournal';
+import CommonPagination from '@/components/common/CommonPagination';
 
 type Props = {}
+interface JournalProps {
+    searchParams: { [key: string]: string | string[] | undefined };
+  }
 
 const montserrat = Montserrat({ subsets: ["latin"] })
 
@@ -32,10 +39,27 @@ async function getUserId() {
   }
 
 
-
-export default async function page({}: Props) {
+export default async function page({ searchParams}: JournalProps) {
     const supabase = createServerComponentClient({ cookies })
     const userId = await getUserId();
+
+     // Fetch total pages
+  const { count } = await supabase
+  .from("journals")
+  .select("*", { count: "exact", head: true });
+
+  // Pagination
+  const limit = 10;
+  const totalPages = count ? Math.ceil(count / limit) : 0;
+  const page =
+    typeof searchParams.page === "string" &&
+    +searchParams.page > 1 &&
+    +searchParams.page <= totalPages
+      ? +searchParams.page
+      : 1;
+  const from = (page - 1) * limit;
+  const to = page ? from + limit : limit;
+
     
 
     const { data, error } = await supabase
@@ -61,12 +85,18 @@ export default async function page({}: Props) {
         *,
         place_id:places(id, title, peak)
     `)
-    .match({ user_id: userId });
+    .match({ user_id: userId })
+    .order("created_at", { ascending: false })
+    .range(from, to)
 
-    if (journalsError) {
-    console.log(journalsError);
-    return notFound();
-    }
+    // if (journalsError) {
+    // console.log(journalsError);
+    // return notFound();
+    // }
+
+    if (!journalsData || journalsError || !journalsData.length) {
+        return notFound();
+      }
       
   return (
     <div className='w-full md:max-w-6xl'>
@@ -75,11 +105,11 @@ export default async function page({}: Props) {
         <div className="w-10/12 mx-auto mt-4">
             <div className="w-full ">
                 {/** Cover image  */}
-                <div className="flex w-full mx-auto relative h-[20vh]">
+                <div className="flex w-full mx-auto relative border border-dashed border-primary rounded-lg h-[20vh]">
                     <div className="w-full ">
                         {data?.coverUrl ? (
                             <div className="w-full h-full">
-                                <img src={data.coverUrl} alt="" className="w-full h-full object-cover border-2 border-primary" />
+                                <img src={data.coverUrl} alt="" className="w-full h-full object-cover  " />
                             </div>
                         ) : (
                             <img className="w-full h-full object-cover" src={rio.src} alt='Mountain' />
@@ -127,13 +157,33 @@ export default async function page({}: Props) {
                     </Button>
                 </div>
                 {/** Journals  */}
+                {/* <EmptyJournal /> */}
                 <div className="">
-                    {journalsData?.map((journal: Journal) => (
-                            <Suspense key={journal.id} fallback={<JournalLoading />}>
-                                <PersonalJournal journal={journal}  />
-                            </Suspense>
+                    {journalsData?.length && journalsData?.length > 0 ? (
+                        <>
+                            {journalsData?.map((journal: Journal) => (
+                                <Suspense key={journal.id} fallback={<JournalLoading />}>
+                                    <PersonalJournal journal={journal}  />
+                                </Suspense>
 
-                    ))}
+                            ))}
+                        </>
+                    ): (
+                        <EmptyJournal />
+                    )}
+                </div>
+                {/** Pagination */}
+                <div className="w-full md:max-w-4xl px-3">
+                {totalPages > 1 && (
+                    <CommonPagination 
+                    paginationProps={{
+                        page: page,
+                        totalPages: totalPages,
+                        baseUrl: "/journals",
+                        pageUrl: "?page="
+                    }}
+                    />
+                )}
                 </div>
             </div>
         </div>

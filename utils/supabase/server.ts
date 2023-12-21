@@ -1,3 +1,5 @@
+import { Journal } from "@/types/collection";
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { createServerClient, type CookieOptions } from "@supabase/ssr";
 import { cookies } from "next/headers";
 
@@ -32,3 +34,19 @@ export const createClient = (cookieStore: ReturnType<typeof cookies>) => {
     },
   );
 };
+
+export async function getJournal(params: { slug: string[] }) {
+  const slug = params?.slug;
+  const supabase = createServerComponentClient({ cookies })
+  const response = await supabase
+  .from("journals")
+  .select(`
+        *,
+        place_id:places(id, title, peak),
+        user_id(avatarUrl, trade, username)
+        `)
+  .match({ slug: slug })
+  .single<Journal>();
+return response.data;
+}
+

@@ -14,14 +14,14 @@ type Props = {
 export default function MainJournal({journal}: Props) {
   return (
     <>
-    <div className='w-full border-2 border-red-600 px-2 border-t  mt-4 '> 
-      <Link href={`/journal/${journal.id}`} className="flex md:flex-row group flex-col my-5">
+    <div className='w-full border-2 border-red-600 px-2 border-t   mt-4 '> 
+      <Link href={`/journals/${journal.slug}`} className="flex md:flex-row group flex-col my-5">
           <div className="flex flex-col  md:w-6/12 w-full rounded-lg ">
-            <div className="mt-4 flex  h-20 border-2 my-3 items-center space-x-3">
+            <div className="mt-4 flex  h-20  my-3 items-center space-x-3">
                 <img 
                     src={journal?.user_id?.avatarUrl|| ''} 
                     alt={journal.title || ''} 
-                    className='h-16 w-16 transition rounded-full border-white border duration-300 ease-in-out ' 
+                    className='h-16 w-16 transition rounded-full border-primary border-2 duration-300 ease-in-out ' 
                 />
                 <div className='my-2'>
                     <div className="mb-2 text-lg capitalize font-bold ">{journal?.user_id?.username|| ''}</div>
