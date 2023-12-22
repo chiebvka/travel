@@ -2,7 +2,6 @@ import React from 'react';
 import DashHead from '@/components/DashHead';
 import { cookies } from "next/headers";
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
-import { redirect } from 'next/navigation';
 import { Separator } from '@/components/ui/separator';
 import JournalForm from './components/JournalForm';
 

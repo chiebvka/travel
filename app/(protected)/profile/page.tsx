@@ -9,14 +9,11 @@ import { Separator } from '@/components/ui/separator';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import JournalLoading from '@/components/JournalLoading';
-import LocationCard from '@/components/LocationCard';
 import { Montserrat } from 'next/font/google';
-import { seoData } from '@/config/main/seo';
-import { Metadata } from 'next';
-import Image from 'next/image';
 import PersonalJournal from './components/PersonalJournal';
 import EmptyJournal from './components/EmptyJournal';
 import CommonPagination from '@/components/common/CommonPagination';
+import toast from 'react-hot-toast';
 
 type Props = {}
 interface JournalProps {
@@ -30,8 +27,7 @@ async function getUserId() {
     const { data: { session }, error, } = await supabase.auth.getSession();
   
     if (error) {
-      console.log("Error has occured while getting UserId!");
-      console.log("Error message : ", error.message);
+      toast.error("Error has occured while getting user details");
       return null;
     }
   
@@ -49,7 +45,7 @@ export default async function page({ searchParams}: JournalProps) {
   .select("*", { count: "exact", head: true });
 
   // Pagination
-  const limit = 10;
+  const limit = 6;
   const totalPages = count ? Math.ceil(count / limit) : 0;
   const page =
     typeof searchParams.page === "string" &&
@@ -74,7 +70,7 @@ export default async function page({ searchParams}: JournalProps) {
       }
     
       if (!data) {
-        console.log("Couldn't find User profile.");
+        toast.error("Error has occured while getting user details");
         return notFound();
       }
 
@@ -89,12 +85,8 @@ export default async function page({ searchParams}: JournalProps) {
     .order("created_at", { ascending: false })
     .range(from, to)
 
-    // if (journalsError) {
-    // console.log(journalsError);
-    // return notFound();
-    // }
 
-    if (!journalsData || journalsError || !journalsData.length) {
+    if ( journalsError) {
         return notFound();
       }
       
@@ -179,7 +171,7 @@ export default async function page({ searchParams}: JournalProps) {
                     paginationProps={{
                         page: page,
                         totalPages: totalPages,
-                        baseUrl: "/journals",
+                        baseUrl: "/profile",
                         pageUrl: "?page="
                     }}
                     />

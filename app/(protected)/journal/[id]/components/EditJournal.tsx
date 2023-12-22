@@ -275,6 +275,7 @@ const deleteImage = async (imageName: string) => {
         dov: journal?.dov ? parse(journal.dov, 'yyyy-MM-dd', new Date()) : new Date(), 
         experience: journal?.experience || '',
         place_id: journal?.place_id?.title || '',
+        user_id: userId,
         imageUrl: journal?.imageUrl || '',
         // Add other properties as needed
       };
@@ -294,7 +295,7 @@ const deleteImage = async (imageName: string) => {
   }
 
 return (
-  <div className='w-10/12 border'>
+  <div className='w-10/12'>
       <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className='w-full space-y-8'>
           <FormField
@@ -302,12 +303,12 @@ return (
           name='title'
           render={({ field }) => (
               <FormItem>
-              <FormLabel>Name</FormLabel>
+              <FormLabel>Journal Title</FormLabel>
               <FormControl>
                   <Input placeholder='Your name' {...field} />
               </FormControl>
               <FormDescription>
-                  This is the name that will be displayed on your profile and in emails.
+                  This is the title of your journal entry
               </FormDescription>
               <FormMessage />
               </FormItem>
@@ -393,7 +394,7 @@ return (
           name='dov'
           render={({ field }) => (
               <FormItem className='flex flex-col'>
-              <FormLabel>Date of birth</FormLabel>
+              <FormLabel>Date of Visit</FormLabel>
               <Popover>
                   <PopoverTrigger asChild>
                   <FormControl>
@@ -416,7 +417,7 @@ return (
                   />
                   </PopoverContent>
               </Popover>
-              <FormDescription>Your date of birth is used to calculate your age.</FormDescription>
+              <FormDescription>The Date you visited said hotspot to help others plan accordingly</FormDescription>
               <FormMessage />
               </FormItem>
           )}
@@ -426,7 +427,7 @@ return (
           name='place_id'
           render={({ field }) => (
               <FormItem className='flex flex-col'>
-              <FormLabel>Language</FormLabel>
+              <FormLabel>Locations</FormLabel>
               <Popover>
                   <PopoverTrigger asChild>
                   <FormControl>
@@ -445,7 +446,7 @@ return (
                   <PopoverContent className=' p-0'>
                   <Command>
                       <CommandInput placeholder='Search language...' />
-                      <CommandEmpty>No language found.</CommandEmpty>
+                      <CommandEmpty>No place found.</CommandEmpty>
                       <CommandGroup>
                       {places.map((place) => (
                           <CommandItem
@@ -468,7 +469,7 @@ return (
                   </Command>
                   </PopoverContent>
               </Popover>
-              <FormDescription>This is the language that will be used in the dashboard.</FormDescription>
+              <FormDescription>Select which of these tourist and vacation hotspots you have visited to narrate your experience </FormDescription>
               <FormMessage />
               </FormItem>
           )}
@@ -478,16 +479,17 @@ return (
           name='experience'
           render={({ field }) => (
               <FormItem>
-              <FormLabel>Bio</FormLabel>
+              <FormLabel>Experience</FormLabel>
               <FormControl>
                   <Textarea
-                  placeholder='Tell us a little bit about yourself'
-                  className='resize-none'
+                  rows={18}
+                  placeholder='Tell us about your experience visiting said location'
+                  className='resize-none rounded-lg'
                   {...field}
                   />
               </FormControl>
               <FormDescription>
-                  You can <span>@mention</span> other users and organizations to link to them.
+                  You can narrate your experience visiting the location and recommendatins for those who plan to visit.
               </FormDescription>
               <FormMessage />
               </FormItem>

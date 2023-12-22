@@ -28,6 +28,8 @@ import { Suspense } from 'react'
 import { ModeToggle } from '@/components/ModeToggle'
 import { Button } from '@/components/ui/button'
 import UserNavigation from '@/components/UserNavigation'
+import PublicEmpty from './journals/components/PublicEmpty'
+import JournalLoading from '@/components/JournalLoading'
 
 
 export const dynamic = 'force-dynamic'
@@ -55,7 +57,20 @@ export default async function Index() {
 
   const {
     data: { user },
-  } = await supabase.auth.getUser()
+  } = await supabase.auth.getUser();
+
+    // Fetch Journals
+    const { data: journalData, error } = await supabase
+    .from("journals")
+    .select(`
+          *,
+          place_id:places(id, title, peak),
+          user_id(avatarUrl, trade, username)
+          `)
+    .order("created_at", { ascending: false })
+    .limit(3);
+
+
 
   return (
     <Suspense >
@@ -94,10 +109,10 @@ export default async function Index() {
           <div className="w-full p-[1px] bg-gradient-to-r from-transparent via-foreground/10 to-transparent" />
 
             <div className="flex">
-              <Sections className={"flex flex-col-reverse "} imagery={vacay} imagingAlt={"Photograph of a family on vacation"} title={"Why My Travel Journal?"} description={"My travel journal is a platform aimed to help users with the right information for their next travel. It allows users share their thoughts and experiences of their trip around the world"} link={"Get Started"} url={"/"}  />
+              <Sections className={"flex flex-col-reverse "} imagery={vacay} imagingAlt={"Photograph of a family on vacation"} title={"Why My Travel Journal?"} description={"My travel journal is a platform aimed to help users with the right information for their next travel. It allows users share their thoughts and experiences of their trip around the world"} link={"Get Started"} url={"/journals"}  />
             </div>
             <div className="flex">
-              <Sections className={"flex mt-3 flex-col-reverse md:flex-row-reverse"} imagery={map} imagingAlt={"Photograph of a guide map"} title={"Destination Guide"} description={"Having issues in finding rthe location for your next trip? We got you covered by providing you with all the information you need for easy navigation to your destination"} link={"Learn More"} url={"/"}  />
+              <Sections className={"flex mt-3 flex-col-reverse md:flex-row-reverse"} imagery={map} imagingAlt={"Photograph of a guide map"} title={"Destination Guide"} description={"Having issues in finding rthe location for your next trip? We got you covered by providing you with all the information you need for easy navigation to your destination"} link={"Learn More"} url={"/journals"}  />
             </div>
 
 
@@ -116,24 +131,24 @@ export default async function Index() {
                 </p>
               </div>
               <div className='hidden  md:grid grid-cols-3 mt-12 gap-5'>
-                <Masonry imagery={map} imagingAlt={"Photograph of a family on vacation"} title={"Paris France"} description={"Offers combination of beautiful scenary, a standard pool, zoo ..."}  url={"/"} className={' col-span-2 h-64 '} />
-                <Masonry imagery={rio} imagingAlt={"Photograph of a family on vacation"} title={"Sydney Opera House Australia"} description={"It is often regarded as one of the most famous and distinctive buildings..."}  url={"/"} className={' row-span-2 '} />
-                <Masonry imagery={guides} imagingAlt={"Photograph of a family on vacation"} title={"Geirangerfjorld, Norway"} description={"Your perfect blend for excitment and tourism"}  url={"/"} className={' row-span-2'} />
-                <Masonry imagery={map} imagingAlt={"Photograph of a family on vacation"} title={"Calabar Nigeria"} description={"Best for kids and paremts"}  url={"/"} className={' h-48 '} />
-                <Masonry imagery={vacay} imagingAlt={"Photograph of a family on vacation"} title={"Ile-Ife Osun, Nigeria"} description={"Allows you to see the beauty of Nigeria and amazing local dishes..."}  url={"/"} className={' h-64 col-span-2'} />
+                <Masonry imagery={map} imagingAlt={"Photograph of a family on vacation"} title={"Paris France"} description={"Offers combination of beautiful scenary, a standard pool, zoo ..."}  url={"/places"} className={' col-span-2 h-64 '} />
+                <Masonry imagery={rio} imagingAlt={"Photograph of a family on vacation"} title={"Sydney Opera House Australia"} description={"It is often regarded as one of the most famous and distinctive buildings..."}  url={"/places"} className={' row-span-2 '} />
+                <Masonry imagery={guides} imagingAlt={"Photograph of a family on vacation"} title={"Geirangerfjorld, Norway"} description={"Your perfect blend for excitment and tourism"}  url={"/places"} className={' row-span-2'} />
+                <Masonry imagery={map} imagingAlt={"Photograph of a family on vacation"} title={"Calabar Nigeria"} description={"Best for kids and paremts"}  url={"/places"} className={' h-48 '} />
+                <Masonry imagery={vacay} imagingAlt={"Photograph of a family on vacation"} title={"Ile-Ife Osun, Nigeria"} description={"Allows you to see the beauty of Nigeria and amazing local dishes..."}  url={"/places"} className={' h-64 col-span-2'} />
               </div>
               <div className="flex md:hidden">
-                <MasonryMobile imagery={map} imagingAlt={"Photograph of a family on vacation"} title={"Paris France"} description={"Offers combination of beautiful scenary, a standard pool, zoo ..."} url={'/'} className={''} />
+                <MasonryMobile imagery={map} imagingAlt={"Photograph of a family on vacation"} title={"Paris France"} description={"Offers combination of beautiful scenary, a standard pool, zoo ..."} url={'/places'} className={''} />
               </div>
               <div className="flex  w-full">
                 <div className="flex w-full items-center justify-center mt-12 mx-auto">
-                  <div className="flex items-center  py-2 px-5 rounded no-underline bg-[#f25f14] text-white hover:bg-btn-background-hover">
+                  <Link href="/places" className="flex items-center  py-2 px-5 rounded no-underline bg-[#f25f14] text-white hover:bg-btn-background-hover">
                     <button  className="mr-2">Search</button>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
                     </svg>
 
-                </div>
+                </Link>
                 </div>
               </div>
             </div>
@@ -150,23 +165,32 @@ export default async function Index() {
                 </p>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-12 px-3 gap-5">
-                <NewsFeed imagery={guides} imagingAlt={"Photograph of a family on vacation"} title={"Visited my home town in Imo State, Nigeria"} description={"So excited to visit my parents here in Imo State, Nigeria. Love the view, food and had a nice time with old school friends and what not "} url={"/"} cityName={"Imo, Nig"} className={''} />
-                <NewsFeed imagery={vacay} imagingAlt={"Photograph of a family on vacation"} title={"A trip with the family to the United States"} description={"So i decided to take my family on a vacation in the US. It has been an amazing experince so far"} url={"/"} cityName={"New York"} className={''} />
-                <NewsFeed imagery={guides} imagingAlt={"Photograph of a family on vacation"} title={"Now in South Africa with friends for our PhD"} description={"Just arrived with my friends to South Africa for our PhD. Already spent one week and it's been wonderful so far "} url={"/"} cityName={"South Africa"} className={''} />
+                {/* {journalData?.map} */}
+                {journalData?.length && journalData?.length > 0 ? (
+            <>
+              {journalData?.map((journal) => (
+                <Suspense key={journal.id} fallback={<JournalLoading />}>
+                  <NewsFeed imagery={journal?.imageUrl} imagingAlt={journal?.slug} title={journal?.title} description={journal?.experience} url={`/journals/${journal?.slug}`} cityName={journal?.place_id?.title} peaks={journal?.place_id?.peak} className={''} />
+                </Suspense>
+              ))}
+            </>
+          ): (
+            <PublicEmpty />
+          )}
               </div>
-              <div className="flex mt-8 md:mt-12 w-full">
-                <div className="flex w-full items-center justify-center  mx-auto">
-                  <Link href="/" className="flex items-center  py-2 px-8 md:px-5 rounded no-underline bg-[#f25f14] text-white hover:bg-btn-background-hover">
+              <div className="flex items-center justify-center mt-8 md:mt-12 w-full">
+                <Button >
+                  <Link href="/journals" className=" px-8 md:px-5  ">
                     View More
-                </Link>
-                </div>
+                  </Link>
+                </Button>
               </div>
             </div>
 
 
             {/** Planning Trip */}
             <div className="flex">
-              <Sections className={""} imagery={vacay} imagingAlt={"Photograph of a family on vacation"} title={"Plan Your Next Travel "} description={"Set reminders and learn about the location for your next travel"} link={"Learn More"} url={"/"}  />
+              <Sections className={""} imagery={vacay} imagingAlt={"Photograph of a family on vacation"} title={"Plan Your Next Travel "} description={"Set reminders and learn about the location for your next travel"} link={"Learn More"} url={"/login"}  />
             </div>
 
 
@@ -183,7 +207,7 @@ export default async function Index() {
               <div className="flex  p-3 relative   mt-5">
                 <SwipeShow imagery={undefined} imagingAlt={undefined} title={undefined} description={undefined} reviewer={undefined} className={''} />
               </div>
-            </div>-+
+            </div>
             
         </div>
 

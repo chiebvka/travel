@@ -1,7 +1,5 @@
 import React from 'react';
 import Image from 'next/image';
-import rio from "@/app/images/rio.jpeg";
-import Link from 'next/link';
 import { getOgImageUrl, getUrl } from "@/lib/utils";
 import { ArchiveIcon, CalendarIcon, ClockIcon } from "lucide-react";
 import readingTime, { ReadTimeResults } from "reading-time";

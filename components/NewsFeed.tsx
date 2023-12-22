@@ -3,22 +3,28 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Montserrat } from 'next/font/google';
 
-type Props = {imagery: any, imagingAlt: any, title: any, description: any,  url: any, cityName: any, className: string}
+type Props = {imagery: any, imagingAlt: any, title: any, description: any, peaks: any, url: any, cityName: any, className: string}
 
 
 const montserrat = Montserrat({ subsets: ["latin"] })
 
 export default function NewsFeed(props: Props) {
 
-  const {imagery, title, imagingAlt, description,  url, cityName, className } = props
+  const {imagery, title, imagingAlt, description, peaks, url, cityName, className } = props
 
   return (
-    <div className={`${className} h-[390px] group mt-3 rounded-lg shadow-md  shadow-slate-600 transition duration-300 ease-in-out overflow-hidden relative `}>
-      <div className="flex  h-1/2  w-full">
-        <Image src={imagery} alt={imagingAlt} className='h-full w-full rounded-t-lg object-cover transition duration-300 ease-in-out group-hover:scale-110'  /> 
+    <Link href={url} className={`${className} h-[390px] group mt-3 rounded-lg shadow-md  shadow-slate-600 transition duration-300 ease-in-out overflow-hidden relative `}>
+      <div className="flex  h-1/2 relative   w-full">
+        <Image 
+          src={imagery} 
+          alt={imagingAlt}                          
+          fill={true}
+          blurDataURL='blur'
+          placeholder='blur'
+          className='w-full h-full transition border-2 border-primary duration-300 ease-in-out object-cover group-hover:scale-90 rounded-lg'   /> 
       </div>
       <div className="flex flex-col h-1/2 px-3 w-full">
-        <h1 className={`${montserrat.className} text-base mt-3 font-bold line-clamp-2 `}>{title}</h1>
+        <h1 className={`${montserrat.className} text-base mt-3 font-bold capitalize line-clamp-2 `}>{title}</h1>
         <div className="flex mt-2">
           <div className="flex items-center  w-1/2">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="#f25f14" className="w-3 h-3">
@@ -27,12 +33,12 @@ export default function NewsFeed(props: Props) {
             <span className='ml-1 text-xs flex '>{cityName}</span>
 
           </div>
-          <Link href={url} className="w-1/2 flex items-center underline text-[#f25f14] text-xs">View on Google Maps</Link>
+          <span  className="w-1/2 flex items-end justify-end text-xs">Peak: <span className='text-primary underline ml-2'>{peaks} </span></span>
         </div>
         <div className="flex mt-2">
           <p className='line-clamp-3'>{description}</p>
         </div>
       </div>
-    </div>
+    </Link>
   )
 }

@@ -2,13 +2,11 @@ import React, { Suspense } from 'react';
 import { cookies } from "next/headers";
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 import DashHead from '@/components/DashHead';
-import LocationCard from '@/components/LocationCard';
 import type { Metadata } from 'next';
 import JournalLoading from '@/components/JournalLoading';
 import MainJournal from './components/MainJournal';
-import CommonPager from '@/components/common/CommonPager';
 import CommonPagination from '@/components/common/CommonPagination';
-import EmptyJournal from '../(protected)/profile/components/EmptyJournal';
+import PublicEmpty from './components/PublicEmpty';
 
 
 export const metadata:Metadata = {
@@ -31,7 +29,7 @@ export default async function JournalsPage({ searchParams}: JournalProps) {
   .select("*", { count: "exact", head: true });
 
   // Pagination
-  const limit = 10;
+  const limit = 6;
   const totalPages = count ? Math.ceil(count / limit) : 0;
   const page =
     typeof searchParams.page === "string" &&
@@ -63,10 +61,10 @@ if (!data || error || !data.length) {
 
 
   return (
-    <div className='border-2 border-red-400 gap-14  w-full md:max-w-6xl px-3  text-foreground bg-background flex flex-col items-center'>
+    <div className=' gap-14  w-full md:max-w-6xl px-3  text-foreground bg-background flex flex-col items-center'>
         <DashHead title={"Your Top News Feed"} subheading={"Here are some top suggestions of places to visit"} />
         <div className="space-y-8 w-10/12 mx-auto  ">
-          <JournalLoading />
+          {/* <JournalLoading /> */}
           {data?.length && data?.length > 0 ? (
             <>
               {data?.map((journal) => (
@@ -76,7 +74,7 @@ if (!data || error || !data.length) {
               ))}
             </>
           ): (
-            <EmptyJournal />
+            <PublicEmpty />
           )}
         </div>
         {/** Pagination */}

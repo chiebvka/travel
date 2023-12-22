@@ -7,6 +7,7 @@ import DashHead from '@/components/DashHead';
 import { Separator } from '@/components/ui/separator';
 import ProfileForm from '../components/ProfileForm';
 import type { Metadata } from 'next';
+import toast from 'react-hot-toast';
 
 // Make another page that allows for profile editing
 
@@ -46,7 +47,7 @@ export default async function page({}: Props) {
 
   if (!data) {
     notFound;
-    console.log("Cound't find User profile.");
+    toast.error("Cound't find User profile.");
   }
 
 

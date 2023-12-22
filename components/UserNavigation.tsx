@@ -32,19 +32,18 @@ export default function UserNavigation({}: Props) {
                   <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
                 </DropdownMenuItem>
               </Link>
-              <Link href="/journals/write">
+              <Link href="/journal/write">
                 <DropdownMenuItem>
                   Write a journal
                   <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
                 </DropdownMenuItem>
               </Link>
-              <Link href="/">
+              <Link href="/profile/edit">
                 <DropdownMenuItem>
                   Settings
                   <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
                 </DropdownMenuItem>
               </Link>
-            <DropdownMenuItem>New Team</DropdownMenuItem>
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
           <DropdownMenuItem >

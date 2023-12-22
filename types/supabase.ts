@@ -128,29 +128,44 @@ export interface Database {
         Row: {
           categorize: string | null
           category: string | null
-          category_id: string | null
+          category_id: {
+            name: string
+          };
           created_at: string
           id: string
           peak: string | null
           title: string | null
+          imageLink: string | null; // Added property based on provided data
+          description: string | null; // Added property based on provided data
+          slug: string | null; 
         }
         Insert: {
           categorize?: string | null
           category?: string | null
-          category_id?: string | null
+          category_id?: {
+            name: string 
+          };
           created_at?: string
           id?: string
           peak?: string | null
           title?: string | null
+          imageLink?: string | null; 
+          description?: string | null; // // Added property based on provided data
+          slug?: string | null; 
         }
         Update: {
           categorize?: string | null
           category?: string | null
-          category_id?: string | null
+          category_id?: {
+            name: string
+          };
           created_at?: string
           id?: string
           peak?: string | null
           title?: string | null
+          imageLink: string | null;
+          description: string | null; //  // Added property based on provided data
+          slug: string | null; 
         }
         Relationships: [
           {
